@@ -144,7 +144,7 @@ export const servicesData = [
     categories: ["Especialidades", "Salud Ocupacional"],
     description: "Evaluación y tratamiento de trastornos de la comunicación, habla, lenguaje y audición.",
     icon: Ear,
-    image: "https://images.unsplash.com/photo-1598256989437-0ea8e8951a94?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1596088869451-491e167efabb?q=80&w=800&auto=format&fit=crop",
     theme: colors.pink,
     highlight: false,
     recommendations: [
@@ -219,7 +219,7 @@ export const servicesData = [
     categories: ["Especialidades", "Imagenología"],
     description: "Examen que registra la actividad eléctrica del corazón para detectar anomalías cardíacas.",
     icon: Activity,
-    image: "https://images.unsplash.com/photo-1505751102861-c3f9e9d1bf0a?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1560306990-18fa759c8713?q=80&w=800&auto=format&fit=crop",
     theme: colors.rose,
     highlight: false,
     recommendations: [
@@ -249,7 +249,7 @@ export const servicesData = [
     categories: ["Especialidades", "Salud Ocupacional"],
     description: "Examen visual completo para el cuidado preventivo y correctivo de sus ojos.",
     icon: Eye,
-    image: "https://images.unsplash.com/photo-1589828131343-bc06ebfbcc80?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1542432389-a40026383873?q=80&w=800&auto=format&fit=crop",
     theme: colors.blue,
     highlight: false,
     recommendations: [
@@ -279,7 +279,7 @@ export const servicesData = [
     categories: ["Especialidades", "CRC"],
     description: "Evaluación de aptitudes físicas, mentales y de coordinación motriz.",
     icon: Activity,
-    image: "https://images.unsplash.com/photo-1574680096145-a05e263c9b74?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1522845052468-8b871a6176e5?q=80&w=800&auto=format&fit=crop",
     theme: colors.amber,
     highlight: false,
     recommendations: [
@@ -324,7 +324,7 @@ export const servicesData = [
     categories: ["Especialidades", "Salud Ocupacional"],
     description: "Evaluación gruesa de la función visual en el entorno laboral.",
     icon: Eye,
-    image: "https://images.unsplash.com/photo-1628177142858-bd03a8d9a244?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1517948430535-1e2469d314fe?q=80&w=800&auto=format&fit=crop",
     theme: colors.sky,
     highlight: false,
     recommendations: [

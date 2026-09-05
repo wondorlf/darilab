@@ -58,7 +58,7 @@ export default function NosotrosPage() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <img src="https://images.unsplash.com/photo-1631815587646-b85a1bb02246?q=80&w=800&auto=format&fit=crop" alt="Historia 1" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm" />
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Historia 1" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm" />
           <img src={assetUrl('/ubicacion.jpeg')} alt="Nuestras Instalaciones" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm mt-8" />
         </div>
       </section>
