@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CalendarHeart } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { assetUrl } from '@/lib/assets';
 
 export default function PromoModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,11 +66,9 @@ export default function PromoModal() {
             
             {/* Contenido Visual */}
             <div className="relative w-full h-auto flex flex-col justify-center items-center">
-               <Image 
-                 src="/ecografias.jpeg" 
+               <img
+                 src={assetUrl('/ecografias.jpeg')}
                  alt="Promoción Especial"
-                 width={1200}
-                 height={800}
                  className="w-full h-auto object-cover max-h-[80vh]"
                />
                <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent flex flex-col md:flex-row items-center justify-between gap-4">

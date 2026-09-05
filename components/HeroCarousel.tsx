@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { assetUrl } from '@/lib/assets';
 
 const slides = [
   {
@@ -56,7 +57,7 @@ export default function HeroCarousel() {
           className={`absolute inset-0 block transition-all duration-[1500ms] ease-in-out ${index === currentSlide ? 'opacity-100 z-10 scale-100' : 'opacity-0 pointer-events-none z-0 scale-105'}`}
         >
           <img 
-              src={slide.image} 
+              src={assetUrl(slide.image)} 
               alt={slide.title} 
               className="absolute inset-0 w-full h-full object-cover"
             />

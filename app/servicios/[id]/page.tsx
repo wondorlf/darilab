@@ -6,6 +6,7 @@ import { Phone, MessageCircle, CalendarDays } from 'lucide-react';
 import Link from 'next/link';
 import ServiceForm from './ServiceForm';
 import { whatsappLink } from '@/lib/contact';
+import { assetUrl } from '@/lib/assets';
 
 // Exportación estática: genera una página HTML por cada servicio.
 export function generateStaticParams() {
@@ -47,7 +48,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         
         {/* Service Hero */}
         <div className="relative rounded-3xl overflow-hidden h-64 md:h-96 flex items-end">
-          <img src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={assetUrl(service.image)} alt={service.title} className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
           <div className="relative z-10 p-6 md:p-10 w-full flex items-center gap-6">
             <div className={`p-4 ${service.theme.solid} rounded-2xl text-white shadow-lg hidden sm:flex`}>

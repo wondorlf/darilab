@@ -6,6 +6,7 @@ import { servicesData } from '@/data/services';
 import HeroCarousel from '@/components/HeroCarousel';
 import PromoModal from '@/components/PromoModal';
 import { EMAIL, WHATSAPP_DISPLAY } from '@/lib/contact';
+import { assetUrl } from '@/lib/assets';
 
 export const metadata: Metadata = {
   title: 'Medicina, Laboratorio Clínico y Salud Ocupacional en Tauramena',
@@ -76,7 +77,7 @@ export default function DariLabHomePage() {
               <Link href={`/servicios/${svc.id}`} key={svc.id} className="bg-white rounded-3xl overflow-hidden border border-slate-200 hover:shadow-lg transition-all group flex flex-col h-full">
                 <div className="h-32 overflow-hidden relative">
                   <div className={`absolute inset-0 ${t.overlay} group-hover:bg-transparent transition-colors z-10`} />
-                  <img src={svc.image} alt={svc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={assetUrl(svc.image)} alt={svc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-5 flex flex-col flex-1">
                   <div className={`w-10 h-10 rounded-xl ${t.bgLight} ${t.text} flex justify-center items-center mb-3 -mt-10 z-20 relative shadow-sm border border-white`}>

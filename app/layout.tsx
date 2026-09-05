@@ -3,6 +3,7 @@ import './globals.css'; // Global styles
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingContact from '@/components/FloatingContact';
+import { assetUrl } from '@/lib/assets';
 
 // GitHub Pages sirve el dominio raíz (darilabips.com) apuntando los
 // registros A en el DNS de Wix a las IPs de GitHub, sin transferir el dominio.
@@ -58,8 +59,8 @@ export const metadata: Metadata = {
     images: ['/logo.jpeg'],
   },
   icons: {
-    icon: '/logo.jpeg',
-    apple: '/logo.jpeg',
+    icon: assetUrl('/logo.jpeg'),
+    apple: assetUrl('/logo.jpeg'),
   },
 };
 

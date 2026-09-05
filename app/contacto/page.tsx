@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { MapPin, Mail, MessageCircle } from 'lucide-react';
 import { whatsappLink, WHATSAPP_DISPLAY, PHONE_NUMBERS, EMAIL } from '@/lib/contact';
+import { assetUrl } from '@/lib/assets';
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
@@ -31,7 +32,7 @@ export default function ContactPage() {
       <div className="relative w-full bg-[#2B3990] overflow-hidden flex items-center justify-center py-20 px-6">
         <div className="absolute inset-0">
           <img
-            src="/ubicacion.jpeg"
+            src={assetUrl('/ubicacion.jpeg')}
             alt="Fondo"
             className="w-full h-full object-cover mix-blend-overlay opacity-30"
           />

@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { servicesData, categories } from '@/data/services';
+import { assetUrl } from '@/lib/assets';
 
 export const metadata: Metadata = {
   title: 'Nuestros Servicios',
@@ -37,7 +38,7 @@ export default function ServicesPage() {
                   <Link href={`/servicios/${svc.id}`} key={svc.id} className="bg-white rounded-3xl overflow-hidden border border-slate-200 hover:shadow-lg transition-all group flex flex-col h-full">
                     <div className="h-40 overflow-hidden relative">
                       <div className={`absolute inset-0 ${t.overlay} group-hover:bg-transparent transition-colors z-10`} />
-                      <img src={svc.image} alt={svc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img src={assetUrl(svc.image)} alt={svc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div className="p-6 flex flex-col flex-1">
                       <div className={`w-12 h-12 rounded-xl border border-white flex justify-center items-center mb-4 -mt-12 z-20 relative shadow-sm ${t.solid} text-white`}>

@@ -2,6 +2,12 @@
 # Se ejecuta en cada push a main (y manualmente desde la pestaña Actions).
 #
 # Requisito en GitHub: Settings → Pages → Source: "GitHub Actions"
+#
+# RUTA BASE (importante):
+#  - Mientras el sitio se ve en https://<usuario>.github.io/<repo>/ → NEXT_PUBLIC_BASE_PATH='/darilab'
+#  - Cuando el dominio darilabips.com apunte a GitHub Pages (registros A en el DNS de Wix +
+#    dominio personalizado en Settings → Pages) el sitio se sirve en la raíz → cambiar a ''
+#    y descomentar el paso que crea el archivo CNAME.
 name: Deploy Next.js site to Pages
 
 on:
@@ -17,6 +23,10 @@ permissions:
 concurrency:
   group: 'pages'
   cancel-in-progress: false
+
+env:
+  # Prefijo de la sub-ruta en GitHub Pages. Vacío cuando el dominio propio sirve en la raíz.
+  NEXT_PUBLIC_BASE_PATH: '/darilab'
 
 jobs:
   build:
@@ -37,14 +47,10 @@ jobs:
       - name: Build (static export -> out/)
         run: npm run build
 
-      # Archivo CNAME: GitHub Pages exige que esté en la raíz publicada.
-      - name: Create CNAME
-        run: echo "darilabips.com" > ./out/CNAME
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
+      # Cuando darilabips.com ya apunte aquí: añadir el CNAME y poner
+      # NEXT_PUBLIC_BASE_PATH en '' (arriba).
+      # - name: Create CNAME
+      #   run: echo "darilabips.com" > ./out/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

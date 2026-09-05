@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Target, Lightbulb, HeartPulse, ShieldCheck, Microscope } from 'lucide-react';
+import { assetUrl } from '@/lib/assets';
 
 export const metadata: Metadata = {
   title: 'Nosotros',
@@ -21,7 +22,7 @@ export default function NosotrosPage() {
              className="w-full h-full object-cover opacity-60"
            />
            <img 
-             src="/ubicacion.jpeg" 
+             src={assetUrl('/ubicacion.jpeg')} 
              alt="Instalaciones del laboratorio" 
              className="w-full h-full object-cover opacity-60"
            />
@@ -58,7 +59,7 @@ export default function NosotrosPage() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <img src="https://images.unsplash.com/photo-1631815587646-b85a1bb02246?q=80&w=800&auto=format&fit=crop" alt="Historia 1" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm" />
-          <img src="/ubicacion.jpeg" alt="Nuestras Instalaciones" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm mt-8" />
+          <img src={assetUrl('/ubicacion.jpeg')} alt="Nuestras Instalaciones" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm mt-8" />
         </div>
       </section>
 

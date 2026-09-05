@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ChevronDown, Stethoscope, Microscope, BriefcaseMedical, TestTube, Activity, FileText, HeartPulse, Sparkles, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { categories, servicesData } from '@/data/services';
+import { assetUrl } from '@/lib/assets';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ export default function Header() {
       <Link href="/" className="flex items-center">
         {/* Usamos el logo proporcionado asumiendo que se guardará en public/logo.jpg o lo simulamos con la imagen de URL si la tuvieramos. */}
         <div className="relative h-10 w-40 md:h-12 md:w-48">
-          <img src="/logo.jpeg" alt="DariLab IPS" className="w-full h-full object-contain" onError={(e) => {
+          <img src={assetUrl('/logo.jpeg')} alt="DariLab IPS" className="w-full h-full object-contain" onError={(e) => {
             // Fallback en caso de que no esté en public aún 
             e.currentTarget.style.display = 'none';
             e.currentTarget.nextElementSibling?.classList.remove('hidden');

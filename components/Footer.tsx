@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Facebook, Twitter, Instagram } from 'lucide-react';
 import { whatsappLink, WHATSAPP_DISPLAY, EMAIL } from '@/lib/contact';
 
@@ -20,7 +21,7 @@ export default function Footer() {
         
         <div className="text-center">
           <p className="text-xs text-slate-500 mb-2">© 2024 DariLab IPS • Carrera 7 # 5 - 26, Barrio Gavan, Tauramena - Casanare</p>
-          <a href="/pqrsf" className="text-xs font-bold text-[#00AEEF] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</a>
+          <Link href="/pqrsf" className="text-xs font-bold text-[#00AEEF] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</Link>
         </div>
         
         <div className="flex gap-3 mt-4 md:mt-0">
