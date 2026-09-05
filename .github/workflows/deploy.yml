@@ -25,8 +25,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Prefijo de la sub-ruta en GitHub Pages. Vacío cuando el dominio propio sirve en la raíz.
-  NEXT_PUBLIC_BASE_PATH: '/darilab'
+  # Vacío porque el dominio darilabips.com sirve el sitio en la raíz (no en /darilab/).
+  NEXT_PUBLIC_BASE_PATH: ''
 
 jobs:
   build:
@@ -47,10 +47,8 @@ jobs:
       - name: Build (static export -> out/)
         run: npm run build
 
-      # Cuando darilabips.com ya apunte aquí: añadir el CNAME y poner
-      # NEXT_PUBLIC_BASE_PATH en '' (arriba).
-      # - name: Create CNAME
-      #   run: echo "darilabips.com" > ./out/CNAME
+      - name: Create CNAME
+        run: echo "darilabips.com" > ./out/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
