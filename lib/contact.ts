@@ -29,8 +29,8 @@ export const EMAIL = EMAILS.contacto;
 // Web3Forms access keys (cada key redirige a un buzón de correo diferente).
 export const WEB3FORMS = {
   contacto: '2dd64470-cf25-4ac8-98dd-5eb84ce6ded3', // → contacto@darilabips.com
-  pqrsf: 'f0323c8c-4301-4c8a-b885-18e9e67b50ef',      // → autorizaciones@darilabips.com
-  booking: '3c3719aa-1f11-4254-ba63-50172c02bb9d', // → contacto@darilabips.com
+  pqrsf: 'f0323c8c-4301-4c8a-b885-18e9e67b50ef',      // → gerencia@darilabips.com
+  booking: '3c3719aa-1f11-4254-ba63-50172c02bb9d', // → autorizaciones@darilabips.com
 } as const;
 
 // Mensaje por defecto al abrir el chat de WhatsApp.

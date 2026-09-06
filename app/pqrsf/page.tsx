@@ -92,7 +92,7 @@ export default function PqrsfPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">¡Solicitud Radicada!</h3>
                 <p className="text-slate-600 mb-8 max-w-md mx-auto">
-                  Su {formData.tipoSolicitud.toLowerCase()} ha sido enviada a <strong>{EMAILS.autorizaciones}</strong>. Recibirá una respuesta por correo electrónico a <strong>{formData.email}</strong>.
+                  Su {formData.tipoSolicitud.toLowerCase()} ha sido enviada a <strong>{EMAILS.gerencia}</strong>. Recibirá una respuesta por correo electrónico a <strong>{formData.email}</strong>.
                 </p>
                 <div className="flex justify-center gap-4">
                   <button 
@@ -271,7 +271,7 @@ export default function PqrsfPage() {
                     )}
                   </button>
                   <p className="text-xs text-slate-500 text-center sm:text-left mt-2 sm:mt-0">
-                    Al radicar, su solicitud será enviada a <strong>{EMAILS.autorizaciones}</strong>. Al enviarla, usted autoriza el tratamiento de sus datos personales conforme a nuestra Política de Tratamiento de Datos.
+                    Al radicar, su solicitud será enviada a <strong>{EMAILS.gerencia}</strong>. Al enviarla, usted autoriza el tratamiento de sus datos personales conforme a nuestra Política de Tratamiento de Datos.
                   </p>
                 </div>
 

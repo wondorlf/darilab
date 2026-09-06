@@ -42,7 +42,7 @@ export default function ServiceForm({ defaultServiceId }: { defaultServiceId: st
           <CheckCircle2 className="w-5 h-5" />
           <p className="font-bold">¡Solicitud enviada!</p>
         </div>
-        <p className="text-sm">Su solicitud de turno ha sido enviada a <strong>{EMAILS.contacto}</strong>. Le contactaremos pronto.</p>
+        <p className="text-sm">Su solicitud de turno ha sido enviada a <strong>{EMAILS.autorizaciones}</strong>. Le contactaremos pronto.</p>
         <button onClick={() => setSubmitted(false)} className="mt-4 text-xs font-bold text-emerald-700 underline">Nueva solicitud</button>
       </div>
     );
