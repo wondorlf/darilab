@@ -2,10 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { servicesData } from '@/data/services';
-import { Phone, MessageCircle, CalendarDays } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
 import Link from 'next/link';
 import ServiceForm from './ServiceForm';
-import { whatsappLink } from '@/lib/contact';
 import { assetUrl } from '@/lib/assets';
 
 // Exportación estática: genera una página HTML por cada servicio.
@@ -38,8 +37,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   }
   
   const Icon = service.icon;
-  const bookingMessage = `Hola, me gustaría agendar una cita para el servicio de ${service.title}. Mis datos son:`;
-  const infoMessage = `Hola, quiero más información sobre el servicio de ${service.title}.`;
 
   return (
     <main className="flex-1 w-full max-w-[1440px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-8">
@@ -110,27 +107,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <div className="w-full lg:w-96 flex flex-col gap-6">
         <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm sticky top-28">
            <h3 className="text-xl font-bold text-slate-800 mb-2">Solicitar Cita</h3>
-           <p className="text-sm text-slate-500 mb-6">Elija el canal de su preferencia para agendar para <strong>{service.title}</strong>.</p>
-           
-           <div className="flex flex-col gap-3 mb-6">
-             <a href={whatsappLink(bookingMessage)} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl hover:bg-emerald-600 transition-colors shadow-sm">
-               <Phone className="w-5 h-5" />
-               Agendar por WhatsApp
-             </a>
-             <a href={whatsappLink(infoMessage)} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full bg-slate-800 text-white font-bold py-3 px-4 rounded-xl hover:bg-slate-900 transition-colors shadow-sm">
-               <MessageCircle className="w-5 h-5" />
-               Consultar por WhatsApp
-             </a>
-           </div>
-
-           <div className="relative py-4 mb-2">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-slate-400 font-medium">o llene el formulario</span>
-              </div>
-           </div>
+           <p className="text-sm text-slate-500 mb-6">Diligencie el formulario y elija si enviarlo por WhatsApp o correo para agendar <strong>{service.title}</strong>.</p>
 
            {/* Form Component customized for this service */}
            <ServiceForm defaultServiceId={service.id} serviceTitle={service.title} />
