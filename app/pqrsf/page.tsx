@@ -170,7 +170,8 @@ export default function PqrsfPage() {
                     <label className="block text-sm font-bold text-slate-700 mb-2">Número de Documento <span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
-                      name="numero_documento"
+                      inputMode="numeric"
+                      name="numeroDocumento"
                       value={formData.numeroDocumento}
                       onChange={handleChange}
                       className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AEEF] focus:bg-white transition-all text-slate-800"

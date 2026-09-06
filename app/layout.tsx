@@ -67,6 +67,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="es">
       <body suppressHydrationWarning className="min-h-screen bg-slate-50 font-sans flex flex-col text-slate-800 w-full overflow-x-hidden">
+        {/* Decorative background ribbons — company colors, behind everything */}
+        <div aria-hidden="true" className="bg-ribbon bg-ribbon--ring w-[420px] h-[420px] -left-52 top-[8vh]"></div>
+        <div aria-hidden="true" className="bg-ribbon bg-ribbon--thin w-[620px] h-[620px] -right-72 top-[38vh]"></div>
+        <div aria-hidden="true" className="bg-ribbon bg-ribbon--dot w-56 h-56 -left-24 bottom-[10vh]"></div>
+        <div aria-hidden="true" className="bg-ribbon bg-ribbon--dot-alt w-72 h-72 -right-28 bottom-[12vh]"></div>
         <Header />
         {children}
         <Footer />

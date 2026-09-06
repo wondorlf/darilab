@@ -133,7 +133,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
            </div>
 
            {/* Form Component customized for this service */}
-           <ServiceForm defaultServiceId={service.id} />
+           <ServiceForm defaultServiceId={service.id} serviceTitle={service.title} />
         </div>
       </div>
     </main>

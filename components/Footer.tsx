@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Facebook, Instagram, Mail } from 'lucide-react';
+import { Facebook, Instagram, Mail, MessageCircle } from 'lucide-react';
 import { whatsappLink, WHATSAPP_DISPLAY, EMAILS } from '@/lib/contact';
 
 const emailList = [
@@ -14,23 +14,27 @@ export default function Footer() {
   return (
     <footer className="bg-slate-100 border-t border-slate-200 px-4 md:px-8 py-8 mt-auto">
       <div className="max-w-[1440px] mx-auto flex flex-col gap-6">
-        {/* Top row: WhatsApp + Social */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex gap-6 items-center flex-wrap justify-center">
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 uppercase text-center md:text-left">WhatsApp</span>
-              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-slate-700 hover:text-emerald-600 transition-colors">{WHATSAPP_DISPLAY}</a>
-            </div>
-          </div>
+        {/* Top row: WhatsApp + Social, centered together */}
+        <div className="flex flex-wrap justify-center items-center gap-5">
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-slate-700 hover:text-emerald-600 transition-colors"
+            aria-label="WhatsApp"
+          >
+            <span className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-emerald-500">
+              <MessageCircle className="w-4 h-4" />
+            </span>
+            <span className="text-sm font-bold">{WHATSAPP_DISPLAY}</span>
+          </a>
 
-          <div className="flex gap-3">
-            <a href="https://www.facebook.com/profile.php?id=100063478873317" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-200 transition-colors" aria-label="Facebook">
-               <Facebook className="w-4 h-4" />
-            </a>
-            <a href="https://www.instagram.com/ipsdarilabsas" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-pink-600 hover:border-pink-200 transition-colors" aria-label="Instagram">
-              <Instagram className="w-4 h-4" />
-            </a>
-          </div>
+          <a href="https://www.facebook.com/profile.php?id=100063478873317" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-200 transition-colors" aria-label="Facebook">
+            <Facebook className="w-4 h-4" />
+          </a>
+          <a href="https://www.instagram.com/ipsdarilabsas" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-pink-600 hover:border-pink-200 transition-colors" aria-label="Instagram">
+            <Instagram className="w-4 h-4" />
+          </a>
         </div>
 
         {/* Email grid */}
