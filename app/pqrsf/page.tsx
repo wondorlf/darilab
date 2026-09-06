@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { Send, FileText, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
-import { whatsappLink } from '@/lib/contact';
+import { submitWeb3Forms } from '@/lib/web3forms';
+import { WEB3FORMS, EMAILS } from '@/lib/contact';
 
 export default function PqrsfPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState('');
 
-  // Define state for the form fields
   const [formData, setFormData] = useState({
     tipoSolicitud: 'Petición',
     tipoPersona: 'Natural',
@@ -24,37 +25,36 @@ export default function PqrsfPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError('');
 
-    // Construir el mensaje con todos los datos del radicado y abrir WhatsApp
-    const body = `*Radicado PQRSF - DariLab IPS*
+    const payload: Record<string, string> = {
+      tipo_solicitud: formData.tipoSolicitud,
+      tipo_persona: formData.tipoPersona,
+      tipo_documento: formData.tipoDocumento,
+      numero_documento: formData.numeroDocumento,
+      nombres: formData.nombres,
+      apellidos: formData.apellidos,
+      telefono: formData.telefono,
+      correo: formData.email,
+      descripcion: formData.descripcion,
+      _subject: `PQRSF — ${formData.tipoSolicitud} de ${formData.nombres} ${formData.apellidos}`,
+      _captcha: 'false',
+    };
 
-*Tipo de Solicitud:* ${formData.tipoSolicitud}
-*Tipo de Persona:* ${formData.tipoPersona}
-*Tipo de Documento:* ${formData.tipoDocumento}
-*Número de Documento:* ${formData.numeroDocumento}
-*Nombres:* ${formData.nombres}
-*Apellidos:* ${formData.apellidos}
-*Teléfono:* ${formData.telefono}
-*Correo Electrónico:* ${formData.email}
+    const result = await submitWeb3Forms(WEB3FORMS.pqrsf, payload);
+    setIsSubmitting(false);
 
-*Descripción de los hechos:*
-${formData.descripcion}`;
-
-    window.open(whatsappLink(body), '_blank', 'noopener');
-
-    setTimeout(() => {
-      setIsSubmitting(false);
+    if (result.success) {
       setIsSuccess(true);
-    }, 600);
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
@@ -90,24 +90,17 @@ ${formData.descripcion}`;
                 <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-800 mb-2">¡Solicitud lista en WhatsApp!</h3>
+                <h3 className="text-2xl font-bold text-slate-800 mb-2">¡Solicitud Radicada!</h3>
                 <p className="text-slate-600 mb-8 max-w-md mx-auto">
-                  Se abrió WhatsApp con el detalle de su {formData.tipoSolicitud.toLowerCase()} listo para enviar. Presione <strong>Enviar</strong> en el chat para radicarla oficialmente.
+                  Su {formData.tipoSolicitud.toLowerCase()} ha sido enviada a <strong>{EMAILS.autorizaciones}</strong>. Recibirá una respuesta por correo electrónico a <strong>{formData.email}</strong>.
                 </p>
                 <div className="flex justify-center gap-4">
                   <button 
                     onClick={() => {
                       setIsSuccess(false);
                       setFormData({
-                        tipoSolicitud: 'Petición',
-                        tipoPersona: 'Natural',
-                        tipoDocumento: 'CC',
-                        numeroDocumento: '',
-                        nombres: '',
-                        apellidos: '',
-                        telefono: '',
-                        email: '',
-                        descripcion: ''
+                        tipoSolicitud: 'Petición', tipoPersona: 'Natural', tipoDocumento: 'CC',
+                        numeroDocumento: '', nombres: '', apellidos: '', telefono: '', email: '', descripcion: ''
                       });
                     }}
                     className="bg-slate-100 text-slate-700 px-6 py-2 rounded-xl font-bold hover:bg-slate-200 transition-colors"
@@ -177,7 +170,7 @@ ${formData.descripcion}`;
                     <label className="block text-sm font-bold text-slate-700 mb-2">Número de Documento <span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
-                      name="numeroDocumento"
+                      name="numero_documento"
                       value={formData.numeroDocumento}
                       onChange={handleChange}
                       className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AEEF] focus:bg-white transition-all text-slate-800"
@@ -185,7 +178,7 @@ ${formData.descripcion}`;
                       required
                     />
                   </div>
-                  <div className="hidden md:block"></div> {/* Spacer */}
+                  <div className="hidden md:block"></div>
 
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Nombres / Razón Social <span className="text-red-500">*</span></label>
@@ -241,7 +234,7 @@ ${formData.descripcion}`;
                 </div>
 
                 <div className="pt-2">
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Tensión / Descripción de los hechos <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-bold text-slate-700 mb-2">Descripción de los hechos <span className="text-red-500">*</span></label>
                   <p className="text-slate-500 text-xs mb-3">Sea claro y detallado en la descripción. Indique fechas, lugares y circunstancias relacionadas con su solicitud.</p>
                   <textarea 
                     name="descripcion"
@@ -253,6 +246,12 @@ ${formData.descripcion}`;
                     required
                   ></textarea>
                 </div>
+
+                {error && (
+                  <div className="bg-red-50 text-red-800 p-4 rounded-xl border border-red-200 text-center">
+                    <p className="font-bold text-sm">{error}</p>
+                  </div>
+                )}
 
                 <div className="pt-4 flex flex-col sm:flex-row items-center gap-4 border-t border-slate-100">
                   <button 
@@ -272,7 +271,7 @@ ${formData.descripcion}`;
                     )}
                   </button>
                   <p className="text-xs text-slate-500 text-center sm:text-left mt-2 sm:mt-0">
-                    Al radicar se abrirá WhatsApp con el detalle de su solicitud listo para enviar. Al enviarla, usted autoriza el tratamiento de sus datos personales conforme a nuestra Política de Tratamiento de Datos.
+                    Al radicar, su solicitud será enviada a <strong>{EMAILS.autorizaciones}</strong>. Al enviarla, usted autoriza el tratamiento de sus datos personales conforme a nuestra Política de Tratamiento de Datos.
                   </p>
                 </div>
 

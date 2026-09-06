@@ -15,7 +15,23 @@ export const PHONE_NUMBERS = {
   line3: '+573106799621',
 };
 
-export const EMAIL = 'darilab1999@gmail.com';
+// Correos electrónicos por departamento (@darilabips.com).
+export const EMAILS = {
+  contacto: 'contacto@darilabips.com',
+  gerencia: 'gerencia@darilabips.com',
+  autorizaciones: 'autorizaciones@darilabips.com',
+  facturacion: 'facturacion@darilabips.com',
+} as const;
+
+// Correo principal (backward compat).
+export const EMAIL = EMAILS.contacto;
+
+// Web3Forms access keys (cada key redirige a un buzón de correo diferente).
+export const WEB3FORMS = {
+  contacto: '2dd64470-cf25-4ac8-98dd-5eb84ce6ded3', // → contacto@darilabips.com
+  pqrsf: 'f0323c8c-4301-4c8a-b885-18e9e67b50ef',      // → autorizaciones@darilabips.com
+  booking: '3c3719aa-1f11-4254-ba63-50172c02bb9d', // → contacto@darilabips.com
+} as const;
 
 // Mensaje por defecto al abrir el chat de WhatsApp.
 export const WHATSAPP_DEFAULT_MESSAGE = 'Hola DariLab IPS 👋, vengo de su página web y quiero más información.';

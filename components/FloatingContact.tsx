@@ -1,38 +1,49 @@
 'use client';
 import React, { useState, useMemo } from 'react';
-import { HelpCircle, X, Search, MessageSquare, ChevronLeft, FileText } from 'lucide-react';
+import { HelpCircle, X, Search, Send, ChevronLeft, FileText, CheckCircle2 } from 'lucide-react';
 import { servicesData } from '@/data/services';
 import { useRouter } from 'next/navigation';
-import { whatsappLink } from '@/lib/contact';
+import { EMAILS } from '@/lib/contact';
+import { submitWeb3Forms } from '@/lib/web3forms';
+import { WEB3FORMS } from '@/lib/contact';
 
 export default function FloatingContact() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [activeView, setActiveView] = useState<'menu' | 'search' | 'contact'>('menu');
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const message = [
-      'Hola DariLab IPS 👋, quiero más información.',
-      '',
-      `*Nombre:* ${data.get('nombre')}`,
-      `*Correo:* ${data.get('correo')}`,
-      `*Teléfono:* ${data.get('telefono')}`,
-      '',
-      '*Consulta:*',
-      data.get('consulta'),
-    ].filter(Boolean).join('\n');
+    setSending(true);
+    setError('');
 
-    window.open(whatsappLink(message), '_blank', 'noopener');
-    setSubmitted(true);
-    setTimeout(() => {
-      setIsOpen(false);
-      setSubmitted(false);
-      setActiveView('menu');
-    }, 3000);
+    const data = new FormData(e.currentTarget);
+    const payload: Record<string, string> = {
+      nombre: String(data.get('nombre') || ''),
+      correo: String(data.get('correo') || ''),
+      telefono: String(data.get('telefono') || ''),
+      consulta: String(data.get('consulta') || ''),
+      _subject: `Consulta desde la web — ${data.get('nombre')}`,
+      _captcha: 'false',
+    };
+
+    const result = await submitWeb3Forms(WEB3FORMS.contacto, payload);
+    setSending(false);
+
+    if (result.success) {
+      setSubmitted(true);
+      setTimeout(() => {
+        setIsOpen(false);
+        setSubmitted(false);
+        setActiveView('menu');
+      }, 3000);
+    } else {
+      setError(result.message);
+    }
   };
 
   const filteredServices = useMemo(() => {
@@ -136,7 +147,7 @@ export default function FloatingContact() {
                     className="w-full flex items-center p-4 bg-slate-50 hover:bg-[#86A06D]/10 rounded-2xl border border-slate-100 transition-colors text-left group"
                   >
                     <div className="w-12 h-12 bg-[#86A06D]/10 text-[#86A06D] rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 group-hover:bg-[#86A06D]/20 transition-all">
-                      <MessageSquare className="w-6 h-6" />
+                      <Send className="w-6 h-6" />
                     </div>
                     <div>
                       <span className="block font-bold text-slate-800 text-lg group-hover:text-[#86A06D] transition-colors leading-tight">Solicitar más información</span>
@@ -199,8 +210,11 @@ export default function FloatingContact() {
               {activeView === 'contact' && (
                 submitted ? (
                   <div className="bg-emerald-50 text-emerald-800 p-6 rounded-xl border border-emerald-200 text-center my-4 animate-in fade-in zoom-in-95 duration-300">
-                    <p className="font-bold mb-2 text-lg">¡Mensaje listo en WhatsApp!</p>
-                    <p className="text-sm font-medium">Se abrió WhatsApp con sus datos. Presione <strong>Enviar</strong> para completarlo.</p>
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <CheckCircle2 className="w-5 h-5" />
+                      <p className="font-bold text-lg">¡Mensaje enviado!</p>
+                    </div>
+                    <p className="text-sm font-medium">Su consulta ha sido enviada a <strong>{EMAILS.contacto}</strong>. Le responderemos pronto.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4 animate-in fade-in duration-300">
@@ -220,9 +234,25 @@ export default function FloatingContact() {
                       <label htmlFor="modal-consulta" className="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Servicio o Descripción</label>
                       <textarea required name="consulta" id="modal-consulta" rows={3} placeholder="¿En qué podemos ayudarle?" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#86A06D]/20 focus:border-[#86A06D] transition-all resize-none"></textarea>
                     </div>
-                    <button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl mt-2 transition-all shadow-md hover:shadow-lg active:scale-[0.98] flex items-center justify-center gap-2">
-                      <MessageSquare className="w-5 h-5" />
-                      Enviar por WhatsApp
+
+                    {error && (
+                      <div className="bg-red-50 text-red-800 p-3 rounded-xl border border-red-200 text-center">
+                        <p className="font-bold text-sm">{error}</p>
+                      </div>
+                    )}
+
+                    <button type="submit" disabled={sending} className="w-full bg-[#2B3990] hover:bg-[#202b6d] text-white font-bold py-3.5 rounded-xl mt-2 transition-all shadow-md hover:shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                      {sending ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Enviando...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          Enviar Correo
+                        </>
+                      )}
                     </button>
                   </form>
                 )

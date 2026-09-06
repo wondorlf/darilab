@@ -1,28 +1,39 @@
 'use client';
 import React, { useState } from 'react';
-import { MapPin, Mail, MessageCircle } from 'lucide-react';
-import { whatsappLink, WHATSAPP_DISPLAY, PHONE_NUMBERS, EMAIL } from '@/lib/contact';
+import { MapPin, Mail, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
+import { whatsappLink, WHATSAPP_DISPLAY, PHONE_NUMBERS, EMAILS } from '@/lib/contact';
 import { assetUrl } from '@/lib/assets';
+import { submitWeb3Forms } from '@/lib/web3forms';
+import { WEB3FORMS } from '@/lib/contact';
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const message = [
-      'Hola DariLab IPS 👋, les escribo desde la página web.',
-      '',
-      `*Nombre:* ${data.get('nombre')} ${data.get('apellido')}`,
-      `*Correo:* ${data.get('correo')}`,
-      `*Motivo:* ${data.get('motivo')}`,
-      '',
-      '*Mensaje:*',
-      data.get('mensaje'),
-    ].filter(Boolean).join('\n');
+    setSending(true);
+    setError('');
 
-    window.open(whatsappLink(message), '_blank', 'noopener');
-    setSent(true);
+    const data = new FormData(e.currentTarget);
+    const payload: Record<string, string> = {
+      nombre: `${data.get('nombre')} ${data.get('apellido') || ''}`.trim(),
+      correo: String(data.get('correo') || ''),
+      motivo: String(data.get('motivo') || ''),
+      mensaje: String(data.get('mensaje') || ''),
+      _subject: `Contacto desde la web — ${data.get('motivo')}`,
+      _captcha: 'false',
+    };
+
+    const result = await submitWeb3Forms(WEB3FORMS.contacto, payload);
+    setSending(false);
+
+    if (result.success) {
+      setSent(true);
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
@@ -83,10 +94,13 @@ export default function ContactPage() {
               <Mail className="w-8 h-8" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800 text-lg">Correo Electrónico</h3>
-              <p className="text-slate-500 mt-1">
-                <a href={`mailto:${EMAIL}`} className="hover:text-[#2B3990] hover:underline">{EMAIL}</a>
-              </p>
+              <h3 className="font-bold text-slate-800 text-lg">Correos Electrónicos</h3>
+              <div className="text-slate-500 mt-1 text-sm space-y-0.5">
+                <a href={`mailto:${EMAILS.contacto}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.contacto}</a>
+                <a href={`mailto:${EMAILS.gerencia}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.gerencia}</a>
+                <a href={`mailto:${EMAILS.autorizaciones}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.autorizaciones}</a>
+                <a href={`mailto:${EMAILS.facturacion}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.facturacion}</a>
+              </div>
             </div>
           </div>
 
@@ -104,15 +118,24 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Contact Form -> WhatsApp */}
+        {/* Contact Form -> Email via Web3Forms */}
         <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col">
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">Escríbanos por WhatsApp</h2>
-          <p className="text-slate-500 mb-6 text-sm">Complete el formulario y se abrirá WhatsApp con su mensaje listo para enviar. También puede escribirnos directamente al <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:underline">{WHATSAPP_DISPLAY}</a>.</p>
+          <h2 className="text-2xl font-bold text-slate-800 mb-2">Escríbanos</h2>
+          <p className="text-slate-500 mb-6 text-sm">Complete el formulario y le responderemos por correo electrónico. También puede escribirnos directamente al <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:underline">{WHATSAPP_DISPLAY}</a>.</p>
 
           {sent && (
             <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl border border-emerald-200 mb-6 text-center animate-in fade-in duration-300">
-              <p className="font-bold mb-1">¡Mensaje listo en WhatsApp!</p>
-              <p className="text-sm">Se abrió WhatsApp con sus datos. Presione <strong>Enviar</strong> en el chat para completarlo.</p>
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <CheckCircle2 className="w-5 h-5" />
+                <p className="font-bold">¡Mensaje enviado!</p>
+              </div>
+              <p className="text-sm">Su correo ha sido enviado a {EMAILS.contacto}. Le responderemos pronto.</p>
+            </div>
+          )}
+
+          {error && (
+            <div className="bg-red-50 text-red-800 p-4 rounded-xl border border-red-200 mb-6 text-center">
+              <p className="font-bold text-sm">{error}</p>
             </div>
           )}
 
@@ -148,10 +171,22 @@ export default function ContactPage() {
               <textarea required name="mensaje" id="mensaje" rows={4} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all resize-none"></textarea>
             </div>
 
-            <button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-xl mt-2 transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2">
-              <MessageCircle className="w-5 h-5" />
-              Enviar por WhatsApp
+            <button type="submit" disabled={sending || sent} className="w-full bg-[#2B3990] hover:bg-[#202b6d] text-white font-bold py-4 rounded-xl mt-2 transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {sending ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  Enviando...
+                </>
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  Enviar Correo
+                </>
+              )}
             </button>
+            <p className="text-[11px] text-slate-400 text-center -mt-1">
+              Su mensaje será enviado a {EMAILS.contacto}
+            </p>
           </form>
         </div>
       </div>
