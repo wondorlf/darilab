@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ChevronDown, Stethoscope, Microscope, BriefcaseMedical, TestTube, Activity, FileText, HeartPulse, Sparkles, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { categories, servicesData } from '@/data/services';
+import { whatsappLink } from '@/lib/contact';
 import { assetUrl } from '@/lib/assets';
 
 export default function Header() {
@@ -117,7 +118,7 @@ export default function Header() {
           </div>
         </div>
 
-        <a href="#" className="text-sm font-semibold text-slate-600 px-4 py-1.5 rounded-full hover:bg-sky-100 hover:text-[#2B3990] transition-colors">Resultados</a>
+        <a href={whatsappLink('Solicito mis resultados de exámenes')} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-600 px-4 py-1.5 rounded-full hover:bg-sky-100 hover:text-[#2B3990] transition-colors">Resultados</a>
         <Link href="/contacto" className="bg-[#00AEEF] text-white px-5 py-2 rounded-full text-sm font-bold shadow-sm hover:bg-[#009bd6] transition-colors ml-2">
           Contacto
         </Link>
@@ -152,7 +153,7 @@ export default function Header() {
             )}
           </div>
 
-          <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 px-4 py-2 rounded-xl hover:bg-sky-50 hover:text-[#2B3990] transition-colors">Resultados</a>
+          <a href={whatsappLink('Solicito mis resultados de exámenes')} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 px-4 py-2 rounded-xl hover:bg-sky-50 hover:text-[#2B3990] transition-colors">Resultados</a>
           <Link href="/contacto" onClick={() => setIsMobileMenuOpen(false)} className="bg-[#00AEEF] text-white px-4 py-3 rounded-xl text-center text-sm font-bold shadow-sm hover:bg-[#009bd6] transition-colors mt-2 mx-2">
             Contacto
           </Link>

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Apple, ShieldCheck, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { servicesData } from '@/data/services';
 import HeroCarousel from '@/components/HeroCarousel';
 import PromoModal from '@/components/PromoModal';
@@ -89,45 +89,6 @@ export default function DariLabHomePage() {
               </Link>
             )
           })}
-        </div>
-      </section>
-
-      {/* Blog & News Section */}
-      <section className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm mb-6">
-        <div className="flex justify-between items-end mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-800">Blog de Salud</h2>
-            <p className="text-slate-500 mt-1 text-sm">Artículos de interés y consejos de nuestros especialistas.</p>
-          </div>
-          <a href="#" className="hidden sm:flex text-sm font-bold text-[#00AEEF] hover:underline items-center gap-1">Ver todos los artículos</a>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="group flex flex-col sm:flex-row items-center gap-5 cursor-pointer p-4 rounded-2xl hover:bg-slate-50 transition-colors">
-            <div className="w-full sm:w-32 h-32 bg-slate-100 rounded-2xl overflow-hidden flex-shrink-0">
-              <div className="w-full h-full bg-[#00AEEF]/10 flex items-center justify-center text-[#00AEEF] group-hover:scale-105 transition-transform duration-300">
-                <Apple className="w-10 h-10" />
-              </div>
-            </div>
-            <div className="flex-1 w-full text-left">
-              <p className="text-xs text-slate-400 font-bold uppercase mb-1">Nutrición • 12 Oct</p>
-              <h4 className="text-lg font-bold text-slate-700 group-hover:text-[#00AEEF] transition-colors mb-2">5 consejos para una dieta balanceada en la oficina</h4>
-              <p className="text-sm text-slate-500 line-clamp-2">Descubra cómo mantener niveles óptimos de energía durante su jornada con estos simples hábitos de alimentación.</p>
-            </div>
-          </div>
-          
-          <div className="group flex flex-col sm:flex-row items-center gap-5 cursor-pointer p-4 rounded-2xl hover:bg-slate-50 transition-colors">
-            <div className="w-full sm:w-32 h-32 bg-slate-100 rounded-2xl overflow-hidden flex-shrink-0">
-              <div className="w-full h-full bg-[#86A06D]/10 flex items-center justify-center text-[#86A06D] group-hover:scale-105 transition-transform duration-300">
-                <ShieldCheck className="w-10 h-10" />
-              </div>
-            </div>
-            <div className="flex-1 w-full text-left">
-              <p className="text-xs text-slate-400 font-bold uppercase mb-1">Prevención • 08 Oct</p>
-              <h4 className="text-lg font-bold text-slate-700 group-hover:text-[#86A06D] transition-colors mb-2">La importancia de su chequeo ocupacional anual</h4>
-              <p className="text-sm text-slate-500 line-clamp-2">Explicamos por qué realizarse las pruebas de ingreso y periódicas es vital para su seguridad a largo plazo.</p>
-            </div>
-          </div>
         </div>
       </section>
 

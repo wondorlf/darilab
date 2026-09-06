@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram } from 'lucide-react';
+import { Facebook } from 'lucide-react';
 import { whatsappLink, WHATSAPP_DISPLAY, EMAIL } from '@/lib/contact';
 
 export default function Footer() {
@@ -20,19 +20,13 @@ export default function Footer() {
         </div>
         
         <div className="text-center">
-          <p className="text-xs text-slate-500 mb-2">© 2024 DariLab IPS • Carrera 7 # 5 - 26, Barrio Gavan, Tauramena - Casanare</p>
+          <p className="text-xs text-slate-500 mb-2">© 2026 DariLab IPS • Carrera 7 # 5 - 26, Barrio Gavan, Tauramena - Casanare</p>
           <Link href="/pqrsf" className="text-xs font-bold text-[#00AEEF] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</Link>
         </div>
         
         <div className="flex gap-3 mt-4 md:mt-0">
           <a href="https://www.facebook.com/profile.php?id=100063478873317" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-200 transition-colors" aria-label="Facebook">
              <Facebook className="w-4 h-4" />
-          </a>
-          <a href="#" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-200 transition-colors" aria-label="Twitter">
-            <Twitter className="w-4 h-4" />
-          </a>
-          <a href="#" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-200 transition-colors" aria-label="Instagram">
-            <Instagram className="w-4 h-4" />
           </a>
         </div>
       </div>
