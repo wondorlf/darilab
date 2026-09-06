@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Facebook } from 'lucide-react';
+import { Facebook, Instagram } from 'lucide-react';
 import { whatsappLink, WHATSAPP_DISPLAY, EMAIL } from '@/lib/contact';
 
 export default function Footer() {
@@ -27,6 +27,9 @@ export default function Footer() {
         <div className="flex gap-3 mt-4 md:mt-0">
           <a href="https://www.facebook.com/profile.php?id=100063478873317" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-200 transition-colors" aria-label="Facebook">
              <Facebook className="w-4 h-4" />
+          </a>
+          <a href="https://www.instagram.com/ipsdarilabsas" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-pink-600 hover:border-pink-200 transition-colors" aria-label="Instagram">
+            <Instagram className="w-4 h-4" />
           </a>
         </div>
       </div>

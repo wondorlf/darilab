@@ -44,20 +44,15 @@ export const metadata: Metadata = {
     title: 'DariLab IPS | Salud Integral en Tauramena, Casanare',
     description:
       'Medicina general y especializada, laboratorio clínico, odontología, salud ocupacional e imagenología en Tauramena, Casanare. Agenda tu cita por WhatsApp.',
-    images: [
-      {
-        url: '/logo.jpeg',
-        alt: 'DariLab IPS',
-      },
-    ],
+    images: 'https://darilabips.com/og-image.jpg',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'DariLab IPS | Salud Integral en Tauramena, Casanare',
-    description:
-      'Medicina general y especializada, laboratorio clínico, odontología, salud ocupacional e imagenología en Tauramena, Casanare.',
-    images: ['/logo.jpeg'],
+  other: {
+    'og:image': 'https://darilabips.com/og-image.jpg',
+    'og:image:width': '1200',
+    'og:image:height': '630',
+    'og:image:alt': 'DariLab IPS - Salud Integral en Tauramena, Casanare',
   },
+
   icons: {
     icon: assetUrl('/logo.jpeg'),
     apple: assetUrl('/logo.jpeg'),

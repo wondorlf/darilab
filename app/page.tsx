@@ -34,7 +34,10 @@ const jsonLd = {
     addressRegion: 'Casanare',
     addressCountry: 'CO',
   },
-  sameAs: ['https://www.facebook.com/profile.php?id=100063478873317'],
+  sameAs: [
+    'https://www.facebook.com/profile.php?id=100063478873317',
+    'https://www.instagram.com/ipsdarilabsas',
+  ],
   priceRange: '$$',
 };
 
