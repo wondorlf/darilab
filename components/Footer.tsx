@@ -5,7 +5,7 @@ import { whatsappLink, WHATSAPP_DISPLAY, EMAILS } from '@/lib/contact';
 
 const emailList = [
   { label: 'Contacto', email: EMAILS.contacto },
-  { label: 'Gerencia / PQRSF', email: EMAILS.gerencia },
+  { label: 'Gerencia', email: EMAILS.gerencia },
 ];
 
 export default function Footer() {

@@ -100,7 +100,7 @@ export default function ContactPage() {
               <h3 className="font-bold text-slate-800 text-lg">Correos Electrónicos</h3>
               <div className="text-slate-500 mt-1 text-sm space-y-1">
                 <a href={`mailto:${EMAILS.contacto}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.contacto}</a>
-                <a href={`mailto:${EMAILS.gerencia}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.gerencia} <span className="text-xs text-slate-400">(PQRSF)</span></a>
+                <a href={`mailto:${EMAILS.gerencia}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.gerencia}</a>
               </div>
             </div>
           </div>
