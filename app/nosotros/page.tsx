@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Target, Lightbulb, HeartPulse, ShieldCheck, Microscope } from 'lucide-react';
 import { assetUrl } from '@/lib/assets';
+import ZoomableImage from '@/components/ZoomableImage';
 
 export const metadata: Metadata = {
   title: 'Nosotros',
@@ -57,10 +58,7 @@ export default function NosotrosPage() {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Historia 1" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm" />
-          <img src={assetUrl('/ubicacion.jpeg')} alt="Nuestras Instalaciones" className="rounded-2xl w-full h-48 md:h-64 object-cover shadow-sm mt-8" />
-        </div>
+        <ZoomableImage src={assetUrl('/equipo-darilab.jpeg')} alt="El equipo humano de DariLab IPS frente a nuestras instalaciones" />
       </section>
 
       {/* Misión y Visión Section */}
@@ -77,7 +75,7 @@ export default function NosotrosPage() {
             </div>
             <h2 className="text-3xl font-bold mb-4">Nuestra Misión</h2>
             <p className="text-white/80 leading-relaxed text-lg">
-              Brindar servicios de salud integrales y diagnósticos de laboratorio confiables, seguros y oportunos, apoyados en tecnología avanzada y un equipo humano altamente calificado, comprometido con la excelencia científica y un trato cálido para mejorar la calidad de vida de nuestros usuarios.
+              Brindamos salud familiar, laboral y seguridad vial con un enfoque integral, oportuno y humanizado en espacios modernos y seguros.
             </p>
           </div>
         </div>
@@ -93,7 +91,7 @@ export default function NosotrosPage() {
             </div>
             <h2 className="text-3xl font-bold mb-4">Nuestra Visión</h2>
             <p className="text-white/90 leading-relaxed text-lg flex-1">
-              Consolidarnos para el año 2028 como la Institución Prestadora de Servicios de Salud (IPS) líder y referente en la región, reconocida por la calidad superior de sus diagnósticos, su constante innovación tecnológica y organizativa, y su firme compromiso con la mejora continua y el bienestar integral de la comunidad.
+              En 2036, seremos la IPS y CRC líder del Casanare, reconocidos por nuestra excelencia, confort y un equipo humano dedicado a proteger la salud y la seguridad vial de nuestra comunidad.
             </p>
           </div>
         </div>

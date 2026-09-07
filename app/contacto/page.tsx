@@ -68,6 +68,9 @@ export default function ContactPage() {
             <div>
               <h3 className="font-bold text-slate-800 text-lg">Nuestra Ubicación</h3>
               <p className="text-slate-500 mt-1">Carrera 7 # 5 - 26<br/>Barrio Gavan<br/>Tauramena - Casanare</p>
+              <a href="https://maps.app.goo.gl/Pn8f3RBPetRK7JYy8" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-2 text-sm font-bold text-[#00AEEF] hover:text-[#2B3990] hover:underline">
+                Cómo llegar <MapPin className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
@@ -95,18 +98,16 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="font-bold text-slate-800 text-lg">Correos Electrónicos</h3>
-              <div className="text-slate-500 mt-1 text-sm space-y-0.5">
+              <div className="text-slate-500 mt-1 text-sm space-y-1">
                 <a href={`mailto:${EMAILS.contacto}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.contacto}</a>
-                <a href={`mailto:${EMAILS.gerencia}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.gerencia}</a>
-                <a href={`mailto:${EMAILS.autorizaciones}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.autorizaciones}</a>
-                <a href={`mailto:${EMAILS.facturacion}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.facturacion}</a>
+                <a href={`mailto:${EMAILS.gerencia}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.gerencia} <span className="text-xs text-slate-400">(PQRSF)</span></a>
               </div>
             </div>
           </div>
 
           <div className="bg-white p-2 rounded-3xl border border-slate-200 shadow-sm overflow-hidden h-64 relative mt-2">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15915.68817757912!2d-72.76615731976077!3d5.01869830872655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e16fd4ed73319cf%3A0xe7dc281ddde1c6db!2sTauramena%2C%20Casanare!5e0!3m2!1ses!2sco!4v1717364125860!5m2!1ses!2sco"
+              src="https://maps.google.com/maps?q=5.0140625,-72.7462218&z=17&output=embed"
               width="100%"
               height="100%"
               style={{border: 0, borderRadius: '1.25rem'}}

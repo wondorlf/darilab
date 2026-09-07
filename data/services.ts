@@ -15,7 +15,9 @@ import {
   LineChart,
   ClipboardList,
   ShieldAlert,
-  Sprout
+  Sprout,
+  Wind,
+  Baby
 } from 'lucide-react';
 
 const colors = {
@@ -74,6 +76,21 @@ export const servicesData = [
       "Presentar remisión médica si aplica.",
       "Traer exámenes previos relacionados a su condición.",
       "Asistir con un acompañante si requiere asistencia."
+    ]
+  },
+  {
+    id: "ginecologia-y-obstetricia",
+    title: "Ginecología y Obstetricia",
+    categories: ["Medicina", "Especialidades"],
+    description: "Atención especializada para su salud íntima, reproductiva y maternal: control ginecológico, planificación familiar, control prenatal y menopausia.",
+    icon: Baby,
+    image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop",
+    theme: colors.pink,
+    highlight: false,
+    recommendations: [
+      "Agende su cita con anticipación (jornadas de ginecología los miércoles).",
+      "Traer historia clínica y resultados de exámenes previos.",
+      "Para control prenatal: llevar carné maternal y órdenes médicas."
     ]
   },
   {
@@ -301,6 +318,21 @@ export const servicesData = [
       "Vestir ropa y zapatos cómodos/deportivos.",
       "Traer remisión médica u orden del tratamiento.",
       "Asistir 10 minutos antes para preparación."
+    ]
+  },
+  {
+    id: "terapia-respiratoria",
+    title: "Terapia Respiratoria",
+    categories: ["Especialidades"],
+    description: "Evaluación y tratamiento integral de afecciones respiratorias: nebulizaciones, ejercicios de reexpansión pulmonar y fisioterapia respiratoria para niños y adultos.",
+    icon: Wind,
+    image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?q=80&w=800&auto=format&fit=crop",
+    theme: colors.teal,
+    highlight: false,
+    recommendations: [
+      "Traer remisión médica u orden del tratamiento si la tiene.",
+      "No usar inhaladores una hora antes de la sesión, salvo indicación médica.",
+      "Vestir ropa cómoda que no ajuste en el tórax."
     ]
   },
   {

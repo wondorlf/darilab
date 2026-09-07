@@ -53,7 +53,7 @@ export default function PromoModal() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+            className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Botón de cerrar */}
@@ -65,25 +65,25 @@ export default function PromoModal() {
             </button>
             
             {/* Contenido Visual */}
-            <div className="relative w-full h-auto flex flex-col justify-center items-center">
+            <div className="relative w-full">
                <img
-                 src={assetUrl('/ecografias.jpeg')}
-                 alt="Promoción Especial"
-                 className="w-full h-auto object-cover max-h-[80vh]"
+                 src={assetUrl('/promo-ginecologia.jpeg')}
+                 alt="Miércoles de Ginecología y Obstetricia en DariLab IPS"
+                 className="w-full h-auto max-h-[70vh] object-contain bg-pink-50"
                />
-               <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent flex flex-col md:flex-row items-center justify-between gap-4">
-                 <div className="text-white">
-                   <h3 className="text-2xl font-bold mb-1">Nuevo Servicio de Ecografías</h3>
-                   <p className="text-white/80">Imágenes precisas que cuidan tu salud.</p>
-                 </div>
-                 <Link 
-                   href="/servicios/ecografias" 
-                   onClick={handleClose}
-                   className="shrink-0 bg-[#00AEEF] text-white font-bold py-3 px-8 rounded-full hover:bg-[#009bd6] transition-colors shadow-lg"
-                 >
-                   Ver detalles
-                 </Link>
-               </div>
+            </div>
+            <div className="bg-gradient-to-r from-[#2B3990] to-[#00AEEF] p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-white text-center sm:text-left">
+                <h3 className="text-lg font-bold leading-tight">Miércoles de Ginecología y Obstetricia</h3>
+                <p className="text-white/80 text-sm">Atención especializada para tu salud íntima, reproductiva y maternal.</p>
+              </div>
+              <Link
+                href="/servicios/ginecologia-y-obstetricia"
+                onClick={handleClose}
+                className="shrink-0 bg-white text-[#2B3990] font-bold py-2.5 px-6 rounded-full hover:bg-pink-50 transition-colors shadow-lg"
+              >
+                Agenda tu cita
+              </Link>
             </div>
           </motion.div>
         </motion.div>

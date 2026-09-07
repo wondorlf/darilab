@@ -5,9 +5,7 @@ import { whatsappLink, WHATSAPP_DISPLAY, EMAILS } from '@/lib/contact';
 
 const emailList = [
   { label: 'Contacto', email: EMAILS.contacto },
-  { label: 'Gerencia', email: EMAILS.gerencia },
-  { label: 'Autorizaciones', email: EMAILS.autorizaciones },
-  { label: 'Facturación', email: EMAILS.facturacion },
+  { label: 'Gerencia / PQRSF', email: EMAILS.gerencia },
 ];
 
 export default function Footer() {
@@ -38,7 +36,7 @@ export default function Footer() {
         </div>
 
         {/* Email grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto w-full">
           {emailList.map(({ label, email }) => (
             <div key={email} className="flex items-start gap-2 bg-white rounded-xl px-3 py-2.5 border border-slate-200">
               <Mail className="w-4 h-4 text-[#00AEEF] mt-0.5 flex-shrink-0" />
