@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { MapPin, Mail, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
 import { whatsappLink, WHATSAPP_DISPLAY, PHONE_NUMBERS, EMAILS } from '@/lib/contact';
 import { assetUrl } from '@/lib/assets';
-import { submitWeb3Forms } from '@/lib/web3forms';
+import { submitWeb3Forms, HONEYPOT_NAME } from '@/lib/web3forms';
 import { WEB3FORMS } from '@/lib/contact';
 
 export default function ContactPage() {
@@ -24,6 +24,7 @@ export default function ContactPage() {
       mensaje: String(data.get('mensaje') || ''),
       _subject: `Contacto desde la web — ${data.get('motivo')}`,
       _captcha: 'false',
+      [HONEYPOT_NAME]: String(data.get(HONEYPOT_NAME) || ''),
     };
 
     const result = await submitWeb3Forms(WEB3FORMS.contacto, payload);
@@ -141,24 +142,26 @@ export default function ContactPage() {
           )}
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {/* Honeypot anti-spam: invisible para usuarios, los bots lo rellenan */}
+            <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label htmlFor="nombre" className="text-[11px] font-bold uppercase text-slate-400">Nombre</label>
+                <label htmlFor="nombre" className="text-[11px] font-bold uppercase text-slate-500">Nombre</label>
                 <input required name="nombre" id="nombre" type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all" />
               </div>
               <div className="space-y-1.5">
-                <label htmlFor="apellido" className="text-[11px] font-bold uppercase text-slate-400">Apellido</label>
+                <label htmlFor="apellido" className="text-[11px] font-bold uppercase text-slate-500">Apellido</label>
                 <input name="apellido" id="apellido" type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all" />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="correo" className="text-[11px] font-bold uppercase text-slate-400">Correo Electrónico</label>
+              <label htmlFor="correo" className="text-[11px] font-bold uppercase text-slate-500">Correo Electrónico</label>
               <input required name="correo" id="correo" type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all" />
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="motivo" className="text-[11px] font-bold uppercase text-slate-400">Motivo</label>
+              <label htmlFor="motivo" className="text-[11px] font-bold uppercase text-slate-500">Motivo</label>
               <select name="motivo" id="motivo" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all appearance-none">
                 <option>Información General</option>
                 <option>Felicitaciones</option>
@@ -168,7 +171,7 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="mensaje" className="text-[11px] font-bold uppercase text-slate-400">Mensaje</label>
+              <label htmlFor="mensaje" className="text-[11px] font-bold uppercase text-slate-500">Mensaje</label>
               <textarea required name="mensaje" id="mensaje" rows={4} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all resize-none"></textarea>
             </div>
 
@@ -185,7 +188,7 @@ export default function ContactPage() {
                 </>
               )}
             </button>
-            <p className="text-[11px] text-slate-400 text-center -mt-1">
+            <p className="text-[11px] text-slate-500 text-center -mt-1">
               Su mensaje será enviado a {EMAILS.contacto}
             </p>
           </form>

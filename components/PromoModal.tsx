@@ -75,7 +75,7 @@ export default function PromoModal() {
             <div className="bg-gradient-to-r from-[#2B3990] to-[#00AEEF] p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-white text-center sm:text-left">
                 <h3 className="text-lg font-bold leading-tight">Miércoles de Ginecología y Obstetricia</h3>
-                <p className="text-white/80 text-sm">Atención especializada para tu salud íntima, reproductiva y maternal.</p>
+                <p className="text-white/90 text-sm">Atención especializada para tu salud íntima, reproductiva y maternal.</p>
               </div>
               <Link
                 href="/servicios/ginecologia-y-obstetricia"

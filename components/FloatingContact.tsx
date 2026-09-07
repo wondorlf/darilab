@@ -4,7 +4,7 @@ import { HelpCircle, X, Search, Send, ChevronLeft, FileText, CheckCircle2 } from
 import { servicesData } from '@/data/services';
 import { useRouter } from 'next/navigation';
 import { EMAILS } from '@/lib/contact';
-import { submitWeb3Forms } from '@/lib/web3forms';
+import { submitWeb3Forms, HONEYPOT_NAME } from '@/lib/web3forms';
 import { WEB3FORMS } from '@/lib/contact';
 
 export default function FloatingContact() {
@@ -29,6 +29,7 @@ export default function FloatingContact() {
       consulta: String(data.get('consulta') || ''),
       _subject: `Consulta desde la web — ${data.get('nombre')}`,
       _captcha: 'false',
+      [HONEYPOT_NAME]: String(data.get(HONEYPOT_NAME) || ''),
     };
 
     const result = await submitWeb3Forms(WEB3FORMS.contacto, payload);
@@ -87,7 +88,7 @@ export default function FloatingContact() {
               {activeView !== 'menu' && (
                 <button 
                   onClick={() => setActiveView('menu')}
-                  className="mr-3 text-white/80 hover:text-white transition-colors"
+                  className="mr-3 text-white/90 hover:text-white transition-colors"
                   aria-label="Volver atrás"
                 >
                   <ChevronLeft className="w-6 h-6" />
@@ -103,7 +104,7 @@ export default function FloatingContact() {
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="absolute top-6 right-6 text-white/80 hover:text-white transition-colors"
+                className="absolute top-6 right-6 text-white/90 hover:text-white transition-colors"
                 aria-label="Cerrar"
               >
                 <X className="w-6 h-6" />
@@ -172,8 +173,8 @@ export default function FloatingContact() {
                   </div>
                   <div className="flex-1 overflow-y-auto space-y-2 pr-1">
                     {searchQuery.trim() === '' ? (
-                       <div className="text-center text-slate-400 py-12 px-4 shadow-sm border border-slate-100 bg-slate-50 rounded-xl">
-                          <Search className="w-8 h-8 mx-auto mb-3 text-slate-300" />
+                       <div className="text-center text-slate-500 py-12 px-4 shadow-sm border border-slate-100 bg-slate-50 rounded-xl">
+                          <Search className="w-8 h-8 mx-auto mb-3 text-slate-400" />
                           <span className="text-sm font-medium">Empiece a escribir para buscar servicios</span>
                        </div>
                     ) : filteredServices.length > 0 ? (
@@ -218,20 +219,22 @@ export default function FloatingContact() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4 animate-in fade-in duration-300">
+                    {/* Honeypot anti-spam: invisible para usuarios, los bots lo rellenan */}
+                    <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                     <div className="space-y-1.5">
-                      <label htmlFor="modal-nombre" className="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Nombres y Apellidos</label>
+                      <label htmlFor="modal-nombre" className="text-[11px] font-bold uppercase text-slate-500 tracking-wider">Nombres y Apellidos</label>
                       <input required name="nombre" id="modal-nombre" type="text" placeholder="Ej. Ana Gómez" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#86A06D]/20 focus:border-[#86A06D] transition-all" />
                     </div>
                     <div className="space-y-1.5">
-                      <label htmlFor="modal-correo" className="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Correo Electrónico</label>
+                      <label htmlFor="modal-correo" className="text-[11px] font-bold uppercase text-slate-500 tracking-wider">Correo Electrónico</label>
                       <input required name="correo" id="modal-correo" type="email" placeholder="correo@ejemplo.com" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#86A06D]/20 focus:border-[#86A06D] transition-all" />
                     </div>
                     <div className="space-y-1.5">
-                      <label htmlFor="modal-telefono" className="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Teléfono</label>
+                      <label htmlFor="modal-telefono" className="text-[11px] font-bold uppercase text-slate-500 tracking-wider">Teléfono</label>
                       <input required name="telefono" id="modal-telefono" type="tel" placeholder="+57 300 000 0000" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#86A06D]/20 focus:border-[#86A06D] transition-all" />
                     </div>
                     <div className="space-y-1.5">
-                      <label htmlFor="modal-consulta" className="text-[11px] font-bold uppercase text-slate-400 tracking-wider">Servicio o Descripción</label>
+                      <label htmlFor="modal-consulta" className="text-[11px] font-bold uppercase text-slate-500 tracking-wider">Servicio o Descripción</label>
                       <textarea required name="consulta" id="modal-consulta" rows={3} placeholder="¿En qué podemos ayudarle?" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#86A06D]/20 focus:border-[#86A06D] transition-all resize-none"></textarea>
                     </div>
 

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Send, FileText, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
-import { submitWeb3Forms } from '@/lib/web3forms';
+import { submitWeb3Forms, HONEYPOT_NAME } from '@/lib/web3forms';
 import { WEB3FORMS, EMAILS } from '@/lib/contact';
 
 export default function PqrsfPage() {
@@ -45,6 +45,7 @@ export default function PqrsfPage() {
       descripcion: formData.descripcion,
       _subject: `PQRSF — ${formData.tipoSolicitud} de ${formData.nombres} ${formData.apellidos}`,
       _captcha: 'false',
+      [HONEYPOT_NAME]: (e.target as HTMLFormElement).querySelector<HTMLInputElement>(`[name="${HONEYPOT_NAME}"]`)?.value || '',
     };
 
     const result = await submitWeb3Forms(WEB3FORMS.pqrsf, payload);
@@ -114,6 +115,8 @@ export default function PqrsfPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot anti-spam: invisible para usuarios, los bots lo rellenan */}
+                <input type="text" name={HONEYPOT_NAME} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                 
                 {/* Tipo de Solicitud */}
                 <div className="col-span-full">

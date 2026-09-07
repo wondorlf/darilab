@@ -9,6 +9,7 @@ import { assetUrl } from '@/lib/assets';
 // registros A en el DNS de Wix a las IPs de GitHub, sin transferir el dominio.
 export const metadata: Metadata = {
   metadataBase: new URL('https://darilabips.com'),
+  referrer: 'strict-origin-when-cross-origin',
   title: {
     default: 'DariLab IPS | Salud Integral en Tauramena, Casanare',
     template: '%s | DariLab IPS',
@@ -51,6 +52,10 @@ export const metadata: Metadata = {
     'og:image:width': '1200',
     'og:image:height': '630',
     'og:image:alt': 'DariLab IPS - Salud Integral en Tauramena, Casanare',
+    // CSP en modo Report-Only: no bloquea nada, solo reporta violaciones en consola.
+    // Tras verificar que no hay errores, se activa bloqueando (removiendo '-Report-Only').
+    'Content-Security-Policy-Report-Only':
+      "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com https://maps.gstatic.com https://maps.googleapis.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'",
   },
 
   icons: {
@@ -61,6 +66,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#2B3990',
+  colorScheme: 'light',
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

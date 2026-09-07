@@ -70,7 +70,7 @@ export default function HeroCarousel() {
               <h1 className={`text-white text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 md:mb-4 transition-all duration-1000 transform ${index === currentSlide ? 'translate-y-0 opacity-100 delay-500' : 'translate-y-8 opacity-0'}`}>
                 {slide.title}
               </h1>
-              <p className={`text-white/80 mt-1 md:mt-2 text-sm md:text-lg leading-relaxed mb-6 md:mb-8 md:max-w-xl transition-all duration-1000 transform ${index === currentSlide ? 'translate-y-0 opacity-100 delay-700' : 'translate-y-8 opacity-0'}`}>
+              <p className={`text-white/90 mt-1 md:mt-2 text-sm md:text-lg leading-relaxed mb-6 md:mb-8 md:max-w-xl transition-all duration-1000 transform ${index === currentSlide ? 'translate-y-0 opacity-100 delay-700' : 'translate-y-8 opacity-0'}`}>
                 {slide.description}
               </p>
               <div className={`transition-all duration-1000 transform ${index === currentSlide ? 'translate-y-0 opacity-100 delay-[900ms]' : 'translate-y-8 opacity-0'}`}>

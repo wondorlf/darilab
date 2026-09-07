@@ -35,19 +35,19 @@ export default function ServiceForm({ defaultServiceId, serviceTitle }: { defaul
       className="space-y-4"
     >
       <div className="space-y-1.5">
-        <label htmlFor="nombre" className="text-[11px] font-bold uppercase text-slate-400">Nombre Completo</label>
+        <label htmlFor="nombre" className="text-[11px] font-bold uppercase text-slate-500">Nombre Completo</label>
         <input required name="nombre" id="nombre" type="text" placeholder="Ej. Juan Perez" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all" />
       </div>
       <div className="space-y-1.5">
-        <label htmlFor="telefono" className="text-[11px] font-bold uppercase text-slate-400">Teléfono</label>
+        <label htmlFor="telefono" className="text-[11px] font-bold uppercase text-slate-500">Teléfono</label>
         <input required name="telefono" id="telefono" type="tel" inputMode="tel" placeholder="+57 300 000 0000" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all" />
       </div>
       <div className="space-y-1.5">
-        <label htmlFor="fecha" className="text-[11px] font-bold uppercase text-slate-400">Fecha Preferida (opcional)</label>
+        <label htmlFor="fecha" className="text-[11px] font-bold uppercase text-slate-500">Fecha Preferida (opcional)</label>
         <input name="fecha" id="fecha" type="date" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all" />
       </div>
       <div className="space-y-1.5">
-        <label htmlFor="mensaje" className="text-[11px] font-bold uppercase text-slate-400">Mensaje (opcional)</label>
+        <label htmlFor="mensaje" className="text-[11px] font-bold uppercase text-slate-500">Mensaje (opcional)</label>
         <textarea name="mensaje" id="mensaje" rows={2} placeholder="¿Algo que debamos saber?" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all resize-none" />
       </div>
 
@@ -58,7 +58,7 @@ export default function ServiceForm({ defaultServiceId, serviceTitle }: { defaul
         <MessageCircle className="w-5 h-5" />
         Enviar por WhatsApp
       </button>
-      <p className="text-[11px] text-slate-400 text-center -mt-1">
+      <p className="text-[11px] text-slate-500 text-center -mt-1">
         Su solicitud se envía directamente por WhatsApp a DariLab IPS. Nuestro equipo le confirmará su turno.
       </p>
     </form>
