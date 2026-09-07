@@ -69,11 +69,12 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="es">
       <body suppressHydrationWarning className="min-h-screen bg-slate-50 font-sans flex flex-col text-slate-800 w-full overflow-x-hidden">
-        {/* CSP en modo Report-Only vía http-equiv (React 19 la eleva a <head>).
-            No bloquea nada; revisar consola y luego activar bloqueo real
-            quitando el sufijo '-Report-Only'. */}
+        {/* CSP de bloqueo vía http-equiv (React 19 la eleva a <head>).
+            GitHub Pages no permite cabeceras HTTP personalizadas, así que esta
+            es la única vía. Restringe scripts/conexiones/frames a origenes
+            legítimos y mitiga inyección de código en el navegador. */}
         <meta
-          httpEquiv="Content-Security-Policy-Report-Only"
+          httpEquiv="Content-Security-Policy"
           content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com https://maps.gstatic.com https://maps.googleapis.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; object-src 'none'"
         />
         <Header />
