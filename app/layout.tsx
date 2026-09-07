@@ -52,10 +52,6 @@ export const metadata: Metadata = {
     'og:image:width': '1200',
     'og:image:height': '630',
     'og:image:alt': 'DariLab IPS - Salud Integral en Tauramena, Casanare',
-    // CSP en modo Report-Only: no bloquea nada, solo reporta violaciones en consola.
-    // Tras verificar que no hay errores, se activa bloqueando (removiendo '-Report-Only').
-    'Content-Security-Policy-Report-Only':
-      "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com https://maps.gstatic.com https://maps.googleapis.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'",
   },
 
   icons: {
@@ -73,6 +69,13 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="es">
       <body suppressHydrationWarning className="min-h-screen bg-slate-50 font-sans flex flex-col text-slate-800 w-full overflow-x-hidden">
+        {/* CSP en modo Report-Only vía http-equiv (React 19 la eleva a <head>).
+            No bloquea nada; revisar consola y luego activar bloqueo real
+            quitando el sufijo '-Report-Only'. */}
+        <meta
+          httpEquiv="Content-Security-Policy-Report-Only"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com https://maps.gstatic.com https://maps.googleapis.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+        />
         <Header />
         {children}
         <Footer />
