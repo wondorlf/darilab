@@ -77,6 +77,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           httpEquiv="Content-Security-Policy"
           content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com https://maps.gstatic.com https://maps.googleapis.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; object-src 'none'"
         />
+        {/* Preload del splash (es el elemento LCP pero se renderiza por JS) y
+            preconnect a Unsplash para el carrusel del hero. */}
+        <link rel="preload" href="/promo-ginecologia.jpeg" as="image" fetchPriority="high" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <Header />
         {children}
         <Footer />

@@ -5,7 +5,7 @@ import { assetUrl } from '@/lib/assets';
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=75&w=1600&auto=format&fit=crop",
     title: "CRC - Licencias de Tránsito",
     description: "Centro de Reconocimiento de Conductores para la expedición de certificados médicos para licencias.",
     tag: "Trámites ágiles",
