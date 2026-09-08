@@ -33,13 +33,10 @@ export default function Footer() {
             href="https://maps.app.goo.gl/Pn8f3RBPetRK7JYy8"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-slate-700 hover:text-[#00AEEF] transition-colors"
+            className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[#0077B6] hover:text-[#2B3990] hover:border-sky-200 transition-colors"
             aria-label="Cómo llegar"
           >
-            <span className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[#00AEEF]">
-              <MapPin className="w-4 h-4" />
-            </span>
-            <span className="text-sm font-bold">Cómo llegar</span>
+            <MapPin className="w-4 h-4" />
           </a>
         </div>
 
