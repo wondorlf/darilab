@@ -76,7 +76,7 @@ export default function HeroCarousel() {
                 {slide.description}
               </p>
               <div className={`transition-all duration-1000 transform ${index === currentSlide ? 'translate-y-0 opacity-100 delay-[900ms]' : 'translate-y-8 opacity-0'}`}>
-                <span className="bg-[#00AEEF] text-white px-5 py-2.5 md:px-8 md:py-4 rounded-full text-sm md:text-base font-bold shadow-sm inline-block hover:bg-[#009bd6] transition-colors">
+                <span className="bg-[#0077B6] text-white px-5 py-2.5 md:px-8 md:py-4 rounded-full text-sm md:text-base font-bold shadow-sm inline-block hover:bg-[#009bd6] transition-colors">
                   {slide.linkText}
                 </span>
               </div>

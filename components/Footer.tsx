@@ -69,7 +69,7 @@ export default function Footer() {
               Tel: {WHATSAPP_DISPLAY}
             </a>
           </p>
-          <Link href="/pqrsf" className="text-xs font-bold text-[#0077B6] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</Link>
+          <Link href="/pqrsf" className="text-xs font-bold text-[#005E93] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</Link>
         </div>
       </div>
     </footer>
