@@ -30,7 +30,7 @@ export default function NosotrosPage() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#2B3990]/90 to-transparent flex flex-col justify-center p-8 md:p-16">
           <div className="max-w-xl">
-            <span className="text-[#00AEEF] font-bold uppercase text-sm tracking-widest block mb-2">Sobre Nosotros</span>
+            <span className="text-[#7DD3FC] font-bold uppercase text-sm tracking-widest block mb-2">Sobre Nosotros</span>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">Comprometidos con su salud y bienestar</h1>
             <p className="text-white/90 text-lg leading-relaxed">
               En DariLab IPS, combinamos la experiencia médica con tecnología avanzada para brindar atención integral y diagnósticos precisos.

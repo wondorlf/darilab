@@ -122,7 +122,7 @@ export default function FloatingContact() {
                       <Search className="w-6 h-6" />
                     </div>
                     <div>
-                      <span className="block font-bold text-slate-800 text-lg group-hover:text-[#00AEEF] transition-colors leading-tight">Buscar un servicio</span>
+                      <span className="block font-bold text-slate-800 text-lg group-hover:text-[#0077B6] transition-colors leading-tight">Buscar un servicio</span>
                       <span className="text-slate-500 text-sm">Encuentra especialidades</span>
                     </div>
                   </button>
@@ -138,7 +138,7 @@ export default function FloatingContact() {
                       <FileText className="w-6 h-6" />
                     </div>
                     <div>
-                      <span className="block font-bold text-slate-800 text-lg group-hover:text-[#00AEEF] transition-colors leading-tight">PQRSF</span>
+                      <span className="block font-bold text-slate-800 text-lg group-hover:text-[#0077B6] transition-colors leading-tight">PQRSF</span>
                       <span className="text-slate-500 text-sm">Peticiones, quejas y reclamos</span>
                     </div>
                   </button>
@@ -193,7 +193,7 @@ export default function FloatingContact() {
                               <Icon className="w-5 h-5" />
                             </div>
                             <div>
-                              <span className="block font-bold text-slate-800 text-sm group-hover:text-[#00AEEF] transition-colors leading-tight">{svc.title}</span>
+                              <span className="block font-bold text-slate-800 text-sm group-hover:text-[#0077B6] transition-colors leading-tight">{svc.title}</span>
                               <span className="text-slate-500 text-xs line-clamp-1 mt-0.5">{svc.description}</span>
                             </div>
                           </button>

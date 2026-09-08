@@ -14,10 +14,10 @@ export default function Footer() {
       <div className="max-w-[1440px] mx-auto flex flex-col gap-6">
         {/* Top row: Redes sociales primero, luego WhatsApp con número, y Cómo llegar */}
         <div className="flex flex-wrap justify-center items-center gap-5">
-          <a href="https://www.facebook.com/profile.php?id=100063478873317" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sky-600 hover:border-sky-200 transition-colors" aria-label="Facebook">
+          <a href="https://www.facebook.com/profile.php?id=100063478873317" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[#1877F2] hover:text-sky-700 hover:border-sky-200 transition-colors" aria-label="Facebook">
             <Facebook className="w-4 h-4" />
           </a>
-          <a href="https://www.instagram.com/ipsdarilabsas" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-pink-600 hover:border-pink-200 transition-colors" aria-label="Instagram">
+          <a href="https://www.instagram.com/ipsdarilabsas" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[#C13584] hover:text-pink-700 hover:border-pink-200 transition-colors" aria-label="Instagram">
             <Instagram className="w-4 h-4" />
           </a>
           <a
@@ -47,7 +47,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto w-full">
           {emailList.map(({ label, email }) => (
             <div key={email} className="flex items-start gap-2 bg-white rounded-xl px-3 py-2.5 border border-slate-200">
-              <Mail className="w-4 h-4 text-[#00AEEF] mt-0.5 flex-shrink-0" />
+              <Mail className="w-4 h-4 text-[#0077B6] mt-0.5 flex-shrink-0" />
               <div className="flex flex-col min-w-0">
                 <span className="text-[10px] font-bold text-slate-500 uppercase">{label}</span>
                 <a href={`mailto:${email}`} className="text-xs font-semibold text-slate-700 hover:text-[#00AEEF] transition-colors truncate">{email}</a>
@@ -69,7 +69,7 @@ export default function Footer() {
               Tel: {WHATSAPP_DISPLAY}
             </a>
           </p>
-          <Link href="/pqrsf" className="text-xs font-bold text-[#00AEEF] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</Link>
+          <Link href="/pqrsf" className="text-xs font-bold text-[#0077B6] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</Link>
         </div>
       </div>
     </footer>

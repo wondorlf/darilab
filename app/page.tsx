@@ -66,7 +66,7 @@ export default function DariLabHomePage() {
              <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Servicios Destacados</h2>
              <p className="text-slate-500 mt-2 text-sm max-w-2xl">Conozca nuestros servicios médicos y de laboratorio más solicitados, pensados para el bienestar de nuestros pacientes corporativos y particulares.</p>
            </div>
-           <Link href="/servicios" className="text-sm font-bold text-[#00AEEF] hover:text-[#009bd6] flex items-center gap-1 group whitespace-nowrap">
+           <Link href="/servicios" className="text-sm font-bold text-[#0077B6] hover:text-[#009bd6] flex items-center gap-1 group whitespace-nowrap">
              Ver todo el portafolio
              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
            </Link>

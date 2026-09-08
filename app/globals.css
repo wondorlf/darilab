@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+/* Placeholders de formularios más legibles (antes slate-300/400 ~2:1, ahora 4.6:1) */
+input::placeholder,
+textarea::placeholder {
+  color: #64748b; /* slate-500 */
+  opacity: 1;
+}

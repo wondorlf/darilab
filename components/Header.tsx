@@ -81,8 +81,7 @@ export default function Header() {
                             </Link>
                           </li>
                         ))}
-                      </ul>
-                      <Link href="/servicios" className="text-xs font-semibold text-[#00AEEF] hover:underline mt-2 inline-block">Ver todos →</Link>
+                      </ul>                       <Link href="/servicios" className="text-xs font-semibold text-[#0077B6] hover:underline mt-2 inline-block">Ver todos →</Link>
                     </div>
                   )
                 })}

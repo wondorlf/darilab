@@ -69,7 +69,7 @@ export default function ContactPage() {
             <div>
               <h3 className="font-bold text-slate-800 text-lg">Nuestra Ubicación</h3>
               <p className="text-slate-500 mt-1">Carrera 7 # 5 - 26<br/>Barrio Gavan<br/>Tauramena - Casanare</p>
-              <a href="https://maps.app.goo.gl/Pn8f3RBPetRK7JYy8" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-2 text-sm font-bold text-[#00AEEF] hover:text-[#2B3990] hover:underline">
+              <a href="https://maps.app.goo.gl/Pn8f3RBPetRK7JYy8" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-2 text-sm font-bold text-[#0077B6] hover:text-[#2B3990] hover:underline">
                 Cómo llegar <MapPin className="w-4 h-4" />
               </a>
             </div>
