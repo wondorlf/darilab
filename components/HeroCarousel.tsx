@@ -59,6 +59,8 @@ export default function HeroCarousel() {
           <img 
               src={assetUrl(slide.image)} 
               alt={slide.title} 
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchPriority={index === 0 ? 'high' : undefined}
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#2B3990]/95 via-[#2B3990]/80 md:via-[#2B3990]/60 to-transparent"></div>
@@ -88,9 +90,11 @@ export default function HeroCarousel() {
           <button
             key={index}
             onClick={(e) => { e.preventDefault(); setCurrentSlide(index); }}
-            className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${index === currentSlide ? 'bg-[#00AEEF] w-6 md:w-8' : 'bg-white/50 hover:bg-white/80'}`}
+            className={`h-6 md:h-8 flex items-center justify-center px-1 transition-all ${index === currentSlide ? 'w-8 md:w-10' : 'w-6 md:w-8'}`}
             aria-label={`Ir a diapositiva ${index + 1}`}
-          />
+          >
+            <span className={`block rounded-full transition-all ${index === currentSlide ? 'w-4 md:w-6 h-2 md:h-2.5 bg-[#00AEEF]' : 'w-2 h-2 md:w-3 md:h-3 bg-white/50 hover:bg-white/80'}`} />
+          </button>
         ))}
       </div>
     </div>

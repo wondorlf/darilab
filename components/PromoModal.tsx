@@ -59,6 +59,7 @@ export default function PromoModal() {
             {/* Botón de cerrar */}
             <button 
               onClick={handleClose}
+              aria-label="Cerrar"
               className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full text-slate-700 hover:bg-white transition-colors shadow-sm"
             >
               <X className="w-5 h-5" />
@@ -69,6 +70,8 @@ export default function PromoModal() {
                <img
                  src={assetUrl('/promo-ginecologia.jpeg')}
                  alt="Miércoles de Ginecología y Obstetricia en DariLab IPS"
+                 width={900}
+                 height={1600}
                  className="w-full h-auto max-h-[70vh] object-contain bg-pink-50"
                />
             </div>

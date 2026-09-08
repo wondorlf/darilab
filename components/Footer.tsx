@@ -58,7 +58,7 @@ export default function Footer() {
 
         {/* Bottom: copyright + PQRSF */}
         <div className="text-center">
-          <p className="text-xs text-slate-500 mb-2">
+          <p className="text-xs text-slate-600 mb-2">
             © 2026 DariLab IPS • Carrera 7 # 5 - 26, Barrio Gavan, Tauramena - Casanare •{' '}
             <a
               href={whatsappLink()}
