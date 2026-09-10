@@ -3,6 +3,7 @@ import './globals.css'; // Global styles
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingContact from '@/components/FloatingContact';
+import VisitCounter from '@/components/VisitCounter';
 import { assetUrl } from '@/lib/assets';
 
 // GitHub Pages sirve el dominio raíz (darilabips.com) apuntando los
@@ -75,7 +76,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             legítimos y mitiga inyección de código en el navegador. */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com https://maps.gstatic.com https://maps.googleapis.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; object-src 'none'"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com https://maps.gstatic.com https://maps.googleapis.com; font-src 'self' data:; connect-src 'self' https://api.web3forms.com https://abacus.jasoncameron.dev; frame-src https://www.google.com https://maps.google.com; form-action 'self'; base-uri 'self'; object-src 'none'"
         />
         {/* Preload del splash (es el elemento LCP pero se renderiza por JS) y
             preconnect a Unsplash para el carrusel del hero. */}
@@ -86,6 +87,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         {children}
         <Footer />
         <FloatingContact />
+        <VisitCounter />
       </body>
     </html>
   );
