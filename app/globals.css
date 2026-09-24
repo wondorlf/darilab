@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* Placeholders de formularios más legibles (antes slate-300/400 ~2:1, ahora 4.6:1) */
 input::placeholder,
