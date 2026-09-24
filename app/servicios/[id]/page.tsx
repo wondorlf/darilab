@@ -1,8 +1,13 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { servicesData } from '@/data/services';
-import { CalendarDays } from 'lucide-react';
+import {
+  servicesData,
+  getParentService,
+  getRelatedServices,
+  getChildServices,
+} from '@/data/services';
+import { CalendarDays, CornerDownRight, Layers } from 'lucide-react';
 import Link from 'next/link';
 import ServiceForm from './ServiceForm';
 import { assetUrl } from '@/lib/assets';
@@ -37,6 +42,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   }
   
   const Icon = service.icon;
+  const parent = getParentService(service);
+  const children = getChildServices(service.id);
+  const related = getRelatedServices(service).filter(r => r.id !== service.id);
 
   return (
     <main className="flex-1 w-full max-w-[1440px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-8">
@@ -52,10 +60,26 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               <Icon className="w-10 h-10" />
             </div>
             <div>
-              <Link href="/servicios" className="text-sky-300 hover:text-white text-xs font-bold uppercase tracking-widest mb-2 block transition-colors">
-                &larr; Volver a Servicios
-              </Link>
+              <nav aria-label="Migas de pan" className="text-sky-300 text-xs font-bold uppercase tracking-widest mb-2 flex flex-wrap items-center gap-2">
+                <Link href="/servicios" className="hover:text-white transition-colors">
+                  &larr; Servicios
+                </Link>
+                {parent && (
+                  <>
+                    <span aria-hidden="true" className="text-sky-500">/</span>
+                    <Link href={`/servicios/${parent.id}`} className="hover:text-white transition-colors inline-flex items-center gap-1">
+                      <CornerDownRight className="w-3 h-3" />
+                      {parent.title}
+                    </Link>
+                  </>
+                )}
+              </nav>
               <h1 className="text-white text-3xl md:text-5xl font-bold">{service.title}</h1>
+              {parent && (
+                <p className="text-white/80 text-sm mt-2">
+                  Parte de <Link href={`/servicios/${parent.id}`} className="underline hover:text-white">{parent.title}</Link>
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -80,7 +104,35 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
              </div>
           </div>
 
-          {service.recommendations && service.recommendations.length > 0 && (
+          {(service.preparationGroups && service.preparationGroups.length > 0) ? (
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <span className={`w-8 h-8 rounded-lg ${service.theme.light} ${service.theme.text} flex items-center justify-center`}>
+                  <Icon className="w-4 h-4" />
+                </span>
+                Recomendaciones y Preparación
+              </h3>
+              <div className="space-y-5">
+                {service.preparationGroups.map((group, gi) => (
+                  <div key={gi} className="bg-slate-50 border border-slate-100 rounded-2xl overflow-hidden">
+                    <div className={`px-5 py-3 ${service.theme.solid} ${service.theme.countText === 'text-white' ? 'text-white' : ''} font-bold text-sm uppercase tracking-wide`}>
+                      {group.title}
+                    </div>
+                    <ul className="p-4 space-y-3">
+                      {group.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-slate-700">
+                          <div className={`mt-0.5 w-6 h-6 rounded-full ${service.theme.countBg} ${service.theme.countText} flex items-center justify-center flex-shrink-0 text-xs font-bold`}>
+                            {i + 1}
+                          </div>
+                          <span className="text-sm leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : service.recommendations && service.recommendations.length > 0 && (
             <div className="mt-8">
               <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
                 <span className={`w-8 h-8 rounded-lg ${service.theme.light} ${service.theme.text} flex items-center justify-center`}>
@@ -98,6 +150,60 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {children.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <span className={`w-8 h-8 rounded-lg ${service.theme.light} ${service.theme.text} flex items-center justify-center`}>
+                  <Layers className="w-4 h-4" />
+                </span>
+                Exámenes y servicios incluidos
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {children.map(child => {
+                  const ChildIcon = child.icon;
+                  return (
+                    <Link
+                      key={child.id}
+                      href={`/servicios/${child.id}`}
+                      className="flex items-start gap-3 p-4 bg-slate-50 border border-slate-100 rounded-xl hover:border-[#00AEEF]/40 hover:bg-[#00AEEF]/5 transition-colors group"
+                    >
+                      <div className={`w-10 h-10 rounded-lg ${child.theme.solid} text-white flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-105 transition-transform`}>
+                        <ChildIcon className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="block font-bold text-slate-800 text-sm group-hover:text-[#0077B6] transition-colors">{child.title}</span>
+                        <span className="text-slate-500 text-xs line-clamp-2 mt-0.5">{child.description}</span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {related.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <span className={`w-8 h-8 rounded-lg ${service.theme.light} ${service.theme.text} flex items-center justify-center`}>
+                  <Layers className="w-4 h-4" />
+                </span>
+                {service.parentId ? 'Otros en esta línea' : 'Servicios relacionados'}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {related.map(rel => (
+                  <Link
+                    key={rel.id}
+                    href={`/servicios/${rel.id}`}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-sm font-semibold text-slate-700 hover:border-[#00AEEF] hover:text-[#0077B6] transition-colors"
+                  >
+                    <span className={`w-2 h-2 rounded-full ${rel.theme.solid}`} aria-hidden="true" />
+                    {rel.title}
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </div>

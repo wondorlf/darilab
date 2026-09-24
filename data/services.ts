@@ -17,7 +17,10 @@ import {
   ShieldAlert,
   Sprout,
   Wind,
-  Baby
+  Baby,
+  Droplets,
+  FlaskConical,
+  TestTube
 } from 'lucide-react';
 
 const colors = {
@@ -47,7 +50,27 @@ export const categories = [
   'Asesorías y Proyectos'
 ];
 
-export const servicesData = [
+export type PreparationGroup = {
+  title: string;
+  items: string[];
+};
+
+export type Service = {
+  id: string;
+  title: string;
+  categories: string[];
+  /** Id del servicio padre cuando este es una parte/examen de otro (ej. coprológico → laboratorio-clinico). */
+  parentId?: string;
+  description: string;
+  icon: typeof Microscope;
+  image: string;
+  theme: typeof colors.emerald;
+  highlight: boolean;
+  recommendations: string[];
+  preparationGroups?: PreparationGroup[];
+};
+
+export const servicesData: Service[] = [
   {
     id: "medicina-general",
     title: "Medicina General",
@@ -106,6 +129,146 @@ export const servicesData = [
       "Ayuno estricto de 8 a 12 horas para exámenes de rutina.",
       "No realizar ejercicio físico intenso el día anterior.",
       "Traer la orden médica impresa o digital."
+    ]
+  },
+  {
+    id: "coprologico",
+    title: "Coprológico, Sangre Oculta y Coproscópico",
+    categories: ["Laboratorio Clínico"],
+    parentId: "laboratorio-clinico",
+    description: "Estudios coprológicos, coproscópicos y detección de sangre oculta en materia fecal para el diagnóstico de afecciones digestivas y parasitarias.",
+    icon: FlaskConical,
+    image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop",
+    theme: colors.teal,
+    highlight: false,
+    recommendations: [
+      "Recoger la muestra en un recipiente estéril (cantidad moderada, aproximadamente un cuarto del tarro).",
+      "Si es un bebé, no recoger la muestra directamente del pañal: poner el pañal del revés (sin gel absorbente) y esperar.",
+      "Para sangre oculta: no haber ingerido carnes rojas ni ensaladas rojas (ej. remolacha) de 2 a 3 días antes, para evitar falsos positivos.",
+      "El coproscópico sigue las mismas indicaciones del coprológico más las de sangre oculta, ya que va junto.",
+      "Las muestras se reciben en cualquier momento."
+    ],
+    preparationGroups: [
+      {
+        title: 'Preparación para coprológico',
+        items: [
+          'Recoger la muestra en un recipiente estéril; cantidad moderada (aproximadamente un cuarto del tarro).',
+          'Si es el caso de un bebé, no recoger la muestra directamente del pañal para evitar contaminación: poner el pañal del revés (por donde no tiene el gel absorbente) y esperar a que haga del cuerpo.'
+        ]
+      },
+      {
+        title: 'Preparación para sangre oculta en materia fecal',
+        items: [
+          'Recoger una cantidad moderada de la muestra (poca cantidad, aproximadamente un cuarto del tarro).',
+          'No haber ingerido carnes rojas ni ensaladas rojas como la de remolacha, de 2 a 3 días antes (para evitar falsos positivos).'
+        ]
+      },
+      {
+        title: 'Preparación para coproscópico',
+        items: [
+          'Seguir las mismas indicaciones del coprológico, más las de sangre oculta en materia fecal, ya que va junto.',
+          'Las muestras se reciben en cualquier momento.'
+        ]
+      }
+    ]
+  },
+  {
+    id: "espermograma",
+    title: "Espermograma Básico",
+    categories: ["Laboratorio Clínico", "Especialidades"],
+    parentId: "laboratorio-clinico",
+    description: "Estudio seminal para evaluar fertilidad y bienestar reproductivo: movilidad, morfología y concentración de espermatozoides. Resultados confiables para cuidar tu salud reproductiva.",
+    icon: Droplets,
+    image: "https://images.unsplash.com/photo-1584362917165-526a968579e8?q=80&w=800&auto=format&fit=crop",
+    theme: colors.sky,
+    highlight: false,
+    recommendations: [
+      "Abstinencia sexual de 1 a 4 días antes del examen (permite obtener una muestra válida y con un resultado confiable).",
+      "Entregar la muestra en un máximo de 20 minutos después de la recogida.",
+      "No consumir alcohol ni drogas de 2 a 7 días antes del examen.",
+      "Evitar saunas y baños calientes de 2 a 3 días antes.",
+      "Recoger la muestra solo por masturbación; no usar preservativo ni lubricantes.",
+      "Cada paciente debe traer su propio frasco estéril con tapa de rosca.",
+      "Entregar la muestra en el laboratorio de DariLab lo antes posible dentro del tiempo establecido."
+    ],
+    preparationGroups: [
+      {
+        title: 'Abstinencia sexual',
+        items: [
+          'De 1 a 4 días antes del examen. La abstinencia sexual permite obtener una muestra válida y con un resultado confiable.'
+        ]
+      },
+      {
+        title: 'Tiempo de entrega de la muestra',
+        items: [
+          'La muestra debe entregarse en un máximo de 20 minutos después de la recogida.'
+        ]
+      },
+      {
+        title: 'Recomendaciones importantes',
+        items: [
+          'No consumir alcohol ni drogas de 2 a 7 días antes del examen.',
+          'Evitar saunas y baños calientes de 2 a 3 días antes.',
+          'Realizarlo en un ambiente tranquilo y fresco.',
+          'Seguir las indicaciones del personal de salud.'
+        ]
+      },
+      {
+        title: 'Recolección de la muestra',
+        items: [
+          'La muestra debe obtenerse por masturbación.',
+          'No es permitido el uso de preservativos ni lubricantes.',
+          'Cada paciente debe traer su propio frasco estéril con tapa de rosca.',
+          'Entregar la muestra en el laboratorio de DariLab lo antes posible dentro del tiempo establecido.'
+        ]
+      },
+      {
+        title: 'Importante',
+        items: [
+          'Un buen proceso asegura resultados confiables. Gracias por seguir las indicaciones.'
+        ]
+      }
+    ]
+  },
+  {
+    id: "uroanalisis-urocultivos",
+    title: "Uroanálisis y Urocultivos",
+    categories: ["Laboratorio Clínico"],
+    parentId: "laboratorio-clinico",
+    description: "Análisis de orina y cultivos urinarios para el diagnóstico de infecciones del tracto urinario y otras afecciones. Tu colaboración es muy importante para obtener resultados confiables.",
+    icon: TestTube,
+    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?q=80&w=800&auto=format&fit=crop",
+    theme: colors.amber,
+    highlight: false,
+    recommendations: [
+      "Uroanálisis: usar la primera orina de la mañana; hacer aseo previo de los genitales.",
+      "Iniciar la micción y desechar el primer chorrito en el inodoro; recoger la segunda parte directamente en el frasco estéril.",
+      "No recolectar la muestra durante el período menstrual.",
+      "Si tuvo relaciones sexuales, esperar 2 a 3 días posteriores para recoger la muestra.",
+      "Urocultivo: no automedicarse con ningún medicamento antes de la toma de la muestra.",
+      "Si está en tratamiento y el examen es post-medicamento, realizarlo después de 7 días de haberlo terminado, salvo indicación médica diferente.",
+      "Los urocultivos solo se reciben de lunes a jueves en horas de la mañana."
+    ],
+    preparationGroups: [
+      {
+        title: 'Preparación para uroanálisis',
+        items: [
+          'Usar la primera orina de la mañana.',
+          'Realizar aseo previo de los genitales.',
+          'Iniciar la micción y desechar el primer chorrito en el inodoro.',
+          'Recoger la segunda parte de la orina directamente en el frasco estéril.',
+          'No recolectar la muestra durante el período menstrual.',
+          'Si tuvo relaciones sexuales, esperar 2 a 3 días posteriores para recoger la muestra.'
+        ]
+      },
+      {
+        title: 'Preparación para urocultivo',
+        items: [
+          'No automedicarse con ningún medicamento antes de la toma de la muestra.',
+          'Si está en tratamiento y el examen es post-medicamento, realizarlo después de 7 días de haberlo terminado, salvo indicación médica diferente.',
+          'Los urocultivos solo se reciben de lunes a jueves en horas de la mañana.'
+        ]
+      }
     ]
   },
   {
@@ -189,6 +352,7 @@ export const servicesData = [
     id: "ortodoncia",
     title: "Ortodoncia",
     categories: ["Odontología", "Especialidades"],
+    parentId: "odontologia",
     description: "Corrección de la posición de los dientes y maxilares para una sonrisa saludable y funcional.",
     icon: Smile,
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
@@ -213,12 +377,32 @@ export const servicesData = [
       "Avisar al técnico en caso de sospecha de embarazo.",
       "Retirar joyas, relojes u objetos metálicos de la zona a examinar.",
       "Llevar la orden médica autorizada."
+    ],
+    preparationGroups: [
+      {
+        title: 'Radiografía de columna lumbosacra — Día anterior al examen',
+        items: [
+          'Almorzar caldos o comidas suaves; evite comidas pesadas o de difícil digestión.',
+          'Tomar 1 botella de agua con gas después del almuerzo.',
+          'A las 6:00 p.m. tomar 1 Travado oral y luego otra botella de agua con gas.',
+          'No consumir carnes rojas, granos ni bebidas oscuras.',
+          'No consumir absolutamente nada más después de esa hora.',
+          'Llegar al estudio con intestino limpio y en ayunas para obtener excelente calidad en la toma del estudio radiológico.'
+        ]
+      },
+      {
+        title: 'Importante',
+        items: [
+          'Seguir estas indicaciones es fundamental para obtener imágenes de calidad y un diagnóstico preciso.'
+        ]
+      }
     ]
   },
   {
     id: "ecografias",
     title: "Ecografías",
     categories: ["Imagenología"],
+    parentId: "rayos-x",
     description: "Imágenes precisas que cuidan tu salud. Diagnósticos confiables, atención rápida y segura con profesionales calificados.",
     icon: HeartPulse,
     image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=800&auto=format&fit=crop",
@@ -228,12 +412,41 @@ export const servicesData = [
       "Para ecografía abdominal: Requiere ayuno mínimo de 6 horas.",
       "Para ecografía pélvica: Tomar 4 a 6 vasos de agua 1 hora antes (vejiga llena).",
       "Llevar estudios previos para comparación."
+    ],
+    preparationGroups: [
+      {
+        title: 'Ecografía de abdomen total — Días previos al examen',
+        items: [
+          'Hacer dieta líquida: consumir únicamente alimentos líquidos y claros.',
+          'No ingerir ningún tipo de carnes (rojas, pollo, pescado, embutidos, etc.).',
+          'Evitar bebidas lácteas u oscuras: no consumir leche, yogur, chocolate, café, té, gaseosas oscuras o bebidas alcohólicas.',
+          'Comer consomés o caldos claros de verduras o pollo, sin agregar papa.',
+          'No ingesta de frutas: evitar todo tipo de frutas, jugos naturales y batidos.',
+          'No ingesta de huevo en cualquiera de sus presentaciones.',
+          'Tomar bastante líquido (agua natural en abundancia) durante el día previo al estudio.'
+        ]
+      },
+      {
+        title: 'El día de la cita',
+        items: [
+          'Ayuno de 6 a 8 horas antes del día de la cita (el ayuno permite mejor visualización de los órganos abdominales).',
+          'Venir en ayunas completamente: no consumir ningún alimento ni bebida, ni siquiera agua, antes del estudio.',
+          'Llevar estudios previos para comparación.'
+        ]
+      },
+      {
+        title: 'Importante',
+        items: [
+          'Seguir estas indicaciones es muy importante para obtener imágenes de calidad y un diagnóstico preciso.'
+        ]
+      }
     ]
   },
   {
     id: "electrocardiogramas",
     title: "Electrocardiogramas",
     categories: ["Especialidades", "Imagenología"],
+    parentId: "rayos-x",
     description: "Examen que registra la actividad eléctrica del corazón para detectar anomalías cardíacas.",
     icon: Activity,
     image: "https://images.unsplash.com/photo-1560306990-18fa759c8713?q=80&w=800&auto=format&fit=crop",
@@ -249,6 +462,7 @@ export const servicesData = [
     id: "espirometria",
     title: "Espirometría",
     categories: ["Especialidades", "Salud Ocupacional", "Imagenología"],
+    parentId: "rayos-x",
     description: "Pruebas de función pulmonar para evaluar y diagnosticar problemas respiratorios.",
     icon: Activity,
     image: "https://images.unsplash.com/photo-1584362917165-526a968579e8?q=80&w=800&auto=format&fit=crop",
@@ -294,6 +508,7 @@ export const servicesData = [
     id: "coordinacion-motriz",
     title: "Coordinación Motriz",
     categories: ["Especialidades", "CRC"],
+    parentId: "crc-licencias",
     description: "Evaluación de aptitudes físicas, mentales y de coordinación motriz.",
     icon: Activity,
     image: "https://images.unsplash.com/photo-1522845052468-8b871a6176e5?q=80&w=800&auto=format&fit=crop",
@@ -354,6 +569,7 @@ export const servicesData = [
     id: "visiometria",
     title: "Visiometría",
     categories: ["Especialidades", "Salud Ocupacional"],
+    parentId: "optometria",
     description: "Evaluación gruesa de la función visual en el entorno laboral.",
     icon: Eye,
     image: "https://images.unsplash.com/photo-1517948430535-1e2469d314fe?q=80&w=800&auto=format&fit=crop",
@@ -463,3 +679,44 @@ export const servicesData = [
     ]
   }
 ];
+
+/** Servicios hijos de un servicio padre (parte de él). */
+export function getChildServices(parentId: string): Service[] {
+  return servicesData.filter(s => s.parentId === parentId);
+}
+
+/** Servicio padre de uno dado, si existe. */
+export function getParentService(service: Service): Service | undefined {
+  if (!service.parentId) return undefined;
+  return servicesData.find(s => s.id === service.parentId);
+}
+
+/** Servicios relacionados: hermanos (mismo padre) o hijos, sin repetir el actual. */
+export function getRelatedServices(service: Service): Service[] {
+  if (service.parentId) {
+    return servicesData.filter(s => s.parentId === service.parentId && s.id !== service.id);
+  }
+  const children = getChildServices(service.id);
+  if (children.length > 0) return children;
+  // Sin padre ni hijos: otros servicios que comparten categoría principal
+  const primary = service.categories[0];
+  return servicesData.filter(s => s.id !== service.id && !s.parentId && s.categories.includes(primary)).slice(0, 6);
+}
+
+/** Servicios de una categoría ordenados: padres primero, hijos justo después de su padre. */
+export function getServicesForCategory(category: string): Service[] {
+  const inCategory = servicesData.filter(s => s.categories.includes(category));
+  const roots = inCategory.filter(s => !s.parentId || !inCategory.some(p => p.id === s.parentId));
+  const result: Service[] = [];
+  for (const root of roots) {
+    result.push(root);
+    for (const child of inCategory.filter(s => s.parentId === root.id)) {
+      result.push(child);
+    }
+  }
+  // Huérfanos (parent fuera de la categoría)
+  for (const s of inCategory) {
+    if (!result.includes(s)) result.push(s);
+  }
+  return result;
+}

@@ -1,11 +1,101 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, Stethoscope, Microscope, BriefcaseMedical, TestTube, Activity, FileText, HeartPulse, Sparkles, Menu, X, Download } from 'lucide-react';
+import { ChevronDown, Stethoscope, Microscope, BriefcaseMedical, TestTube, Activity, FileText, HeartPulse, Sparkles, Menu, X, Download, CornerDownRight } from 'lucide-react';
 import Image from 'next/image';
-import { categories, servicesData } from '@/data/services';
+import { categories, servicesData, getChildServices, type Service } from '@/data/services';
 import { whatsappLink, PORTFOLIO_PDF, PORTFOLIO_PDF_FILENAME } from '@/lib/contact';
 import { assetUrl } from '@/lib/assets';
+
+function categoryRoots(category: string): Service[] {
+  const inCat = servicesData.filter(s => s.categories.includes(category));
+  return inCat.filter(s => !s.parentId || !inCat.some(p => p.id === s.parentId));
+}
+
+function categoryChildren(parentId: string, category: string): Service[] {
+  return getChildServices(parentId).filter(s => s.categories.includes(category));
+}
+
+function MegaCategoryList({ category }: { category: string }) {
+  const roots = categoryRoots(category).slice(0, 4);
+  return (
+    <div>
+      <Link href={`/servicios`} className="text-[#2B3990] font-bold mb-3 flex items-center hover:text-[#00AEEF] transition-colors">
+        {category}
+      </Link>
+      <ul className="space-y-2">
+        {roots.map(svc => {
+          const kids = categoryChildren(svc.id, category);
+          return (
+            <li key={svc.id}>
+              <Link href={`/servicios/${svc.id}`} className="text-sm text-slate-500 hover:text-[#86A06D] transition-colors flex items-start gap-2 group/item">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-200 mt-1.5 group-hover/item:bg-[#86A06D] transition-colors flex-shrink-0"></span>
+                <span className="leading-tight">{svc.title}</span>
+              </Link>
+              {kids.length > 0 && (
+                <ul className="ml-4 mt-1 space-y-1 border-l border-slate-100 pl-2">
+                  {kids.slice(0, 5).map(kid => (
+                    <li key={kid.id}>
+                      <Link href={`/servicios/${kid.id}`} className="text-xs text-slate-400 hover:text-[#0077B6] transition-colors flex items-start gap-1.5">
+                        <CornerDownRight className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                        <span className="leading-tight">{kid.title}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      <Link href="/servicios" className="text-xs font-semibold text-[#0077B6] hover:underline mt-2 inline-block">Ver todos →</Link>
+    </div>
+  );
+}
+
+function SingleCategoryItem({ category }: { category: string }) {
+  const roots = categoryRoots(category);
+  if (roots.length === 0) return null;
+  const primary = roots.find(s => !s.parentId) || roots[0];
+  const allKids = getChildServices(primary.id);
+  const Icon = primary.icon;
+  return (
+    <li>
+      <Link href={`/servicios/${primary.id}`} className="flex items-center gap-3 group/item">
+        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white ${primary.theme.solid} group-hover/item:scale-110 transition-transform shadow-sm`}>
+          <Icon className="w-4 h-4" />
+        </div>
+        <div>
+          <span className="block text-sm font-bold text-slate-700 group-hover/item:text-[#2B3990] transition-colors leading-tight">{primary.title}</span>
+        </div>
+      </Link>
+      {allKids.length > 0 && (
+        <ul className="ml-11 mt-1 space-y-0.5 border-l border-slate-200 pl-2">
+          {allKids.slice(0, 5).map(kid => (
+            <li key={kid.id}>
+              <Link href={`/servicios/${kid.id}`} className="text-xs text-slate-400 hover:text-[#0077B6] transition-colors flex items-start gap-1.5 py-0.5">
+                <CornerDownRight className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                <span className="leading-tight">{kid.title}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+      {roots.length > 1 && (
+        <ul className="ml-11 mt-1 space-y-1">
+          {roots.filter(r => r.id !== primary.id).map(r => (
+            <li key={r.id}>
+              <Link href={`/servicios/${r.id}`} className="text-xs text-slate-400 hover:text-[#0077B6] transition-colors flex items-start gap-1.5">
+                <CornerDownRight className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                <span className="leading-tight">{r.title}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -65,26 +155,9 @@ export default function Header() {
               
               {/* Columna 1 y 2: Categorías Múltiples */}
               <div className="col-span-2 grid grid-cols-2 gap-8">
-                {multiCategories.map(cat => {
-                  const svcs = servicesData.filter(s => s.categories.includes(cat)).slice(0, 4); // Mostrar máximo 4 para no saturar
-                  return (
-                    <div key={cat}>
-                      <Link href={`/servicios`} className="text-[#2B3990] font-bold mb-3 flex items-center hover:text-[#00AEEF] transition-colors">
-                        {cat}
-                      </Link>
-                      <ul className="space-y-2">
-                        {svcs.map(svc => (
-                          <li key={svc.id}>
-                            <Link href={`/servicios/${svc.id}`} className="text-sm text-slate-500 hover:text-[#86A06D] transition-colors flex items-start gap-2 group/item">
-                              <span className="w-1.5 h-1.5 rounded-full bg-slate-200 mt-1.5 group-hover/item:bg-[#86A06D] transition-colors flex-shrink-0"></span>
-                              <span className="leading-tight">{svc.title}</span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>                       <Link href="/servicios" className="text-xs font-semibold text-[#0077B6] hover:underline mt-2 inline-block">Ver todos →</Link>
-                    </div>
-                  )
-                })}
+                {multiCategories.map(cat => (
+                  <MegaCategoryList key={cat} category={cat} />
+                ))}
               </div>
 
               {/* Columna 3: Servicios Individuales (juntos) */}
@@ -93,23 +166,9 @@ export default function Header() {
                   <Sparkles className="w-4 h-4" /> Integrales y Diagnóstico
                 </h3>
                 <ul className="space-y-4">
-                  {singleCategories.map(cat => {
-                    const svc = servicesData.find(s => s.categories.includes(cat));
-                    if (!svc) return null;
-                    const Icon = svc.icon;
-                    return (
-                      <li key={cat}>
-                        <Link href={`/servicios/${svc.id}`} className="flex items-center gap-3 group/item">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white ${svc.theme.solid} group-hover/item:scale-110 transition-transform shadow-sm`}>
-                            <Icon className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <span className="block text-sm font-bold text-slate-700 group-hover/item:text-[#2B3990] transition-colors leading-tight">{svc.title}</span>
-                          </div>
-                        </Link>
-                      </li>
-                    )
-                  })}
+                  {singleCategories.map(cat => (
+                    <SingleCategoryItem key={cat} category={cat} />
+                  ))}
                 </ul>
               </div>
 
