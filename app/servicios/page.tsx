@@ -1,8 +1,10 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Download } from 'lucide-react';
 import { servicesData, categories } from '@/data/services';
 import { assetUrl } from '@/lib/assets';
+import { PORTFOLIO_PDF, PORTFOLIO_PDF_FILENAME } from '@/lib/contact';
 
 export const metadata: Metadata = {
   title: 'Nuestros Servicios',
@@ -18,6 +20,14 @@ export default function ServicesPage() {
         <p className="text-slate-600">
           En DariLab ofrecemos un portafolio completo de servicios médicos y diagnósticos con equipos de última tecnología y profesionales altamente calificados.
         </p>
+        <a
+          href={assetUrl(PORTFOLIO_PDF)}
+          download={PORTFOLIO_PDF_FILENAME}
+          className="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl bg-[#2B3990] text-white font-semibold hover:bg-[#202b6d] transition-colors shadow-md hover:shadow-lg active:scale-[0.98]"
+        >
+          <Download className="w-5 h-5" aria-hidden="true" />
+          Descargar portafolio de servicios (PDF)
+        </a>
       </div>
       
       {categories.map(category => {

@@ -1,11 +1,12 @@
 'use client';
 import React, { useState, useMemo } from 'react';
-import { HelpCircle, X, Search, Send, ChevronLeft, FileText, CheckCircle2 } from 'lucide-react';
+import { HelpCircle, X, Search, Send, ChevronLeft, FileText, CheckCircle2, Download } from 'lucide-react';
 import { servicesData } from '@/data/services';
 import { useRouter } from 'next/navigation';
-import { EMAILS } from '@/lib/contact';
+import { EMAILS, PORTFOLIO_PDF, PORTFOLIO_PDF_FILENAME } from '@/lib/contact';
 import { submitWeb3Forms, HONEYPOT_NAME } from '@/lib/web3forms';
 import { WEB3FORMS } from '@/lib/contact';
+import { assetUrl } from '@/lib/assets';
 
 export default function FloatingContact() {
   const router = useRouter();
@@ -127,7 +128,7 @@ export default function FloatingContact() {
                     </div>
                   </button>
                   
-                  <button 
+                  <button
                     onClick={() => {
                       setIsOpen(false);
                       router.push('/pqrsf');
@@ -142,6 +143,21 @@ export default function FloatingContact() {
                       <span className="text-slate-500 text-sm">Peticiones, quejas y reclamos</span>
                     </div>
                   </button>
+
+                  <a
+                    href={assetUrl(PORTFOLIO_PDF)}
+                    download={PORTFOLIO_PDF_FILENAME}
+                    onClick={() => setIsOpen(false)}
+                    className="w-full flex items-center p-4 bg-slate-50 hover:bg-[#2B3990]/10 rounded-2xl border border-slate-100 transition-colors text-left group"
+                  >
+                    <div className="w-12 h-12 bg-[#2B3990]/10 text-[#2B3990] rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 group-hover:bg-[#2B3990]/20 transition-all">
+                      <Download className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <span className="block font-bold text-slate-800 text-lg group-hover:text-[#0077B6] transition-colors leading-tight">Portafolio de servicios</span>
+                      <span className="text-slate-500 text-sm">Descargar PDF</span>
+                    </div>
+                  </a>
 
                   <button 
                     onClick={() => setActiveView('contact')}

@@ -1,11 +1,11 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
 import { servicesData } from '@/data/services';
 import HeroCarousel from '@/components/HeroCarousel';
 import PromoModal from '@/components/PromoModal';
-import { EMAIL, WHATSAPP_DISPLAY } from '@/lib/contact';
+import { EMAIL, WHATSAPP_DISPLAY, PORTFOLIO_PDF, PORTFOLIO_PDF_FILENAME } from '@/lib/contact';
 import { assetUrl } from '@/lib/assets';
 
 export const metadata: Metadata = {
@@ -66,10 +66,20 @@ export default function DariLabHomePage() {
              <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Servicios Destacados</h2>
              <p className="text-slate-500 mt-2 text-sm max-w-2xl">Conozca nuestros servicios médicos y de laboratorio más solicitados, pensados para el bienestar de nuestros pacientes corporativos y particulares.</p>
            </div>
-           <Link href="/servicios" className="text-sm font-bold text-[#0077B6] hover:text-[#009bd6] flex items-center gap-1 group whitespace-nowrap">
-             Ver todo el portafolio
-             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-           </Link>
+           <div className="flex flex-wrap items-center gap-4">
+             <a
+               href={assetUrl(PORTFOLIO_PDF)}
+               download={PORTFOLIO_PDF_FILENAME}
+               className="text-sm font-bold text-[#0077B6] hover:text-[#009bd6] flex items-center gap-1 group whitespace-nowrap"
+             >
+               <Download className="w-4 h-4" aria-hidden="true" />
+               Descargar portafolio (PDF)
+             </a>
+             <Link href="/servicios" className="text-sm font-bold text-[#0077B6] hover:text-[#009bd6] flex items-center gap-1 group whitespace-nowrap">
+               Ver todo el portafolio
+               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+             </Link>
+           </div>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

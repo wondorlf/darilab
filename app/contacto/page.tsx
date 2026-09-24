@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import { MapPin, Mail, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
-import { whatsappLink, WHATSAPP_DISPLAY, PHONE_NUMBERS, EMAILS } from '@/lib/contact';
+import { MapPin, Mail, MessageCircle, Send, CheckCircle2, Download } from 'lucide-react';
+import { whatsappLink, WHATSAPP_DISPLAY, PHONE_NUMBERS, EMAILS, PORTFOLIO_PDF, PORTFOLIO_PDF_FILENAME } from '@/lib/contact';
 import { assetUrl } from '@/lib/assets';
 import { submitWeb3Forms, HONEYPOT_NAME } from '@/lib/web3forms';
 import { WEB3FORMS } from '@/lib/contact';
@@ -103,6 +103,24 @@ export default function ContactPage() {
                 <a href={`mailto:${EMAILS.contacto}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.contacto}</a>
                 <a href={`mailto:${EMAILS.gerencia}`} className="block hover:text-[#2B3990] hover:underline">{EMAILS.gerencia}</a>
               </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex items-start gap-5">
+            <div className="p-4 bg-[#86A06D]/10 rounded-2xl text-[#86A06D]">
+              <Download className="w-8 h-8" />
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 text-lg">Portafolio de Servicios</h3>
+              <p className="text-slate-500 mt-1 text-sm">Descargue el PDF con nuestro portafolio completo.</p>
+              <a
+                href={assetUrl(PORTFOLIO_PDF)}
+                download={PORTFOLIO_PDF_FILENAME}
+                className="inline-flex items-center gap-1.5 mt-2 text-sm font-bold text-[#0077B6] hover:text-[#2B3990] hover:underline"
+              >
+                <Download className="w-4 h-4" aria-hidden="true" />
+                Descargar PDF
+              </a>
             </div>
           </div>
 

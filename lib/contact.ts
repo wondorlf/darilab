@@ -34,6 +34,10 @@ export const WEB3FORMS = {
 // Mensaje por defecto al abrir el chat de WhatsApp.
 export const WHATSAPP_DEFAULT_MESSAGE = 'Hola DariLab IPS 👋, vengo de su página web y quiero más información.';
 
+// Portafolio de servicios descargable (archivo en public/).
+export const PORTFOLIO_PDF = '/portafolio-servicios.pdf';
+export const PORTFOLIO_PDF_FILENAME = 'Portafolio de Servicios - DariLab IPS.pdf';
+
 /**
  * Construye un enlace wa.me con mensaje pre-cargado.
  * Uso: window.open(whatsappLink(texto), '_blank', 'noopener')

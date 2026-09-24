@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Facebook, Instagram, Mail, MessageCircle, MapPin } from 'lucide-react';
-import { whatsappLink, WHATSAPP_DISPLAY, EMAILS } from '@/lib/contact';
+import { Facebook, Instagram, Mail, MessageCircle, MapPin, Download } from 'lucide-react';
+import { whatsappLink, WHATSAPP_DISPLAY, EMAILS, PORTFOLIO_PDF, PORTFOLIO_PDF_FILENAME } from '@/lib/contact';
+import { assetUrl } from '@/lib/assets';
 
 const emailList = [
   { label: 'Contacto', email: EMAILS.contacto },
@@ -67,6 +68,15 @@ export default function Footer() {
             </a>
           </p>
           <Link href="/pqrsf" className="text-xs font-bold text-[#005E93] hover:text-[#2B3990] transition-colors underline">Formulario PQRSF</Link>
+          <span className="text-xs text-slate-400 mx-1">•</span>
+          <a
+            href={assetUrl(PORTFOLIO_PDF)}
+            download={PORTFOLIO_PDF_FILENAME}
+            className="inline-flex items-center gap-1 text-xs font-bold text-[#005E93] hover:text-[#2B3990] transition-colors underline"
+          >
+            <Download className="w-3 h-3" aria-hidden="true" />
+            Portafolio de servicios (PDF)
+          </a>
         </div>
       </div>
     </footer>

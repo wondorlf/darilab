@@ -19,3 +19,17 @@ npm run start      # sirve out/ en http://localhost:8383
 ## Despliegue
 
 Push a `main` → GitHub Actions (`.github/workflows/deploy.yml`) ejecuta lint + build y despliega `out/` a GitHub Pages.
+
+## Portafolio de servicios (PDF)
+
+- **Archivo:** `public/portafolio-servicios.pdf` (en producción: `https://darilabips.com/portafolio-servicios.pdf`)
+- **Constantes:** `PORTFOLIO_PDF` y `PORTFOLIO_PDF_FILENAME` en `lib/contact.ts`
+- **Ubicaciones del enlace de descarga:**
+  - Header desktop y móvil
+  - Widget flotante de ayuda
+  - Home (junto a "Ver todo el portafolio")
+  - Página `/servicios` (botón bajo el título)
+  - Página `/contacto` (tarjeta "Portafolio de Servicios")
+  - Footer (visible en todas las páginas)
+
+Para actualizar el PDF: reemplazar el archivo en `public/portafolio-servicios.pdf` y hacer push a `main`.
