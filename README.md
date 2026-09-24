@@ -33,3 +33,15 @@ Push a `main` → GitHub Actions (`.github/workflows/deploy.yml`) ejecuta lint +
   - Footer (visible en todas las páginas)
 
 Para actualizar el PDF: reemplazar el archivo en `public/portafolio-servicios.pdf` y hacer push a `main`.
+
+## Servicios: jerarquía y diseño
+
+- **Datos:** `data/services.ts` — cada `Service` puede tener `parentId` (parte de otro: coprológico → laboratorio-clinico, ecografías → rayos-x, etc.).
+- **Helpers:** `getChildServices`, `getParentService`, `getRelatedServices`, `getServicesForCategory` (padres primero, hijos justo debajo).
+- **Menú (Header):** hijos anidados bajo el padre en el mega-menú y en ítems de categoría (`CornerDownRight`).
+- **Listado `/servicios`:** hijos con borde `#00AEEF` y badge "Parte de {padre}".
+- **Detalle `/servicios/[id]`:** breadcrumb con padre, sección "Exámenes incluidos" (hijos) y "Servicios relacionados".
+- **Recomendaciones unificadas:** `getDisplayGroups` envuelve `recommendations` en un grupo si no hay `preparationGroups`; mismos estilos en los 31 servicios.
+- **Iconos de grupo:** 1 icono semántico por título de grupo (`groupIconForTitle`: ayuno, muestras, importe, etc.) — sin saturar la UI.
+
+Para añadir un servicio hijo: agregar entrada en `servicesData` con `parentId` apuntando al id del padre (y `categories` que incluya la categoría visible). Sitemap y rutas se generan solos.
