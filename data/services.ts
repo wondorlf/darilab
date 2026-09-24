@@ -1,7 +1,7 @@
-import { 
-  Microscope, 
-  Stethoscope, 
-  Activity, 
+import {
+  Microscope,
+  Stethoscope,
+  Activity,
   HeartPulse,
   Car,
   BriefcaseMedical,
@@ -20,7 +20,21 @@ import {
   Baby,
   Droplets,
   FlaskConical,
-  TestTube
+  TestTube,
+  UtensilsCrossed,
+  Clock,
+  Heart,
+  Ban,
+  ThermometerSun,
+  Shirt,
+  FileText,
+  Dumbbell,
+  Info,
+  ListChecks,
+  ScanLine,
+  Pill,
+  CalendarDays,
+  type LucideIcon
 } from 'lucide-react';
 
 const colors = {
@@ -53,6 +67,8 @@ export const categories = [
 export type PreparationGroup = {
   title: string;
   items: string[];
+  /** Icono semántico opcional; si falta se deduce del título. */
+  icon?: LucideIcon;
 };
 
 export type Service = {
@@ -679,6 +695,53 @@ export const servicesData: Service[] = [
     ]
   }
 ];
+
+/** Icono semántico para un grupo de preparación/recomendaciones (sin saturar: 1 por grupo). */
+export function groupIconForTitle(title: string): LucideIcon {
+  const t = title.toLowerCase();
+  if (/(copro|fecal|sangre oculta|parásit|parasit)/.test(t)) return FlaskConical;
+  if (/(uro|orina|muestra|recole|colectar|frasco|seminal)/.test(t)) return TestTube;
+  if (/(ayuno|dieta|aliment|carne|fruta|huevo|comida|líquid|liquido|caldo)/.test(t)) return UtensilsCrossed;
+  if (/(hora|día |dia |tiempo|minuto|fecha|mañana|manana|semana|antes del examen)/.test(t)) return Clock;
+  if (/(bebé|bebe|pañal|panal)/.test(t)) return Baby;
+  if (/(agua|vejiga|hidrat|líquido natural|liquido natural)/.test(t)) return Droplets;
+  if (/(abstinencia|sexual|relacion)/.test(t)) return Heart;
+  if (/(alcohol|droga|fumar|tabaco|automedic)/.test(t)) return Ban;
+  if (/(sauna|calor|temperatura)/.test(t)) return ThermometerSun;
+  if (/(ropa|vestir|camisa|prend|holgad)/.test(t)) return Shirt;
+  if (/(cédula|cedula|documento|identidad|orden|remisi|autoriza|runt|historia|examen previo|estudio previo)/.test(t)) return FileText;
+  if (/(ejercicio|actividad|físic|fisic|coordinac|aptitud)/.test(t)) return Dumbbell;
+  if (/(locion|loción|crema|talco|lente|contacto|gafas|visión|vision|visual)/.test(t)) return Eye;
+  if (/(medicamento|inhalador|tratamiento|pastilla)/.test(t)) return Pill;
+  if (/(radiograf|imagen|rayos|columna|ecograf)/.test(t)) return ScanLine;
+  if (/(importante|fundamental|asegurar|confiable)/.test(t)) return Info;
+  if (/(ruido|audiometr|oído|oido|auditiv)/.test(t)) return Ear;
+  if (/(cita|agenda|turno|jornada|anticipación|anticipacion)/.test(t)) return CalendarDays;
+  if (/(recolec|recolección|recoleccion|recomendaciones importantes|preparación)/.test(t)) return ListChecks;
+  return ListChecks;
+}
+
+/**
+ * Grupos unificados de recomendación/preparación para el detalle.
+ * Si hay preparationGroups se usan; si solo hay recommendations, se envuelve en un solo grupo con el mismo diseño.
+ */
+export function getDisplayGroups(service: Service): { title: string; items: string[]; icon: LucideIcon }[] {
+  if (service.preparationGroups && service.preparationGroups.length > 0) {
+    return service.preparationGroups.map(g => ({
+      title: g.title,
+      items: g.items,
+      icon: g.icon ?? groupIconForTitle(g.title),
+    }));
+  }
+  if (service.recommendations && service.recommendations.length > 0) {
+    return [{
+      title: 'Recomendaciones y preparación',
+      items: service.recommendations,
+      icon: service.icon,
+    }];
+  }
+  return [];
+}
 
 /** Servicios hijos de un servicio padre (parte de él). */
 export function getChildServices(parentId: string): Service[] {

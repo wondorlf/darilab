@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Download, CornerDownRight } from 'lucide-react';
-import { categories, getServicesForCategory, type Service } from '@/data/services';
+import { categories, servicesData, getServicesForCategory, type Service } from '@/data/services';
 import { assetUrl } from '@/lib/assets';
 import { PORTFOLIO_PDF, PORTFOLIO_PDF_FILENAME } from '@/lib/contact';
 
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 function ServiceCard({ svc, isChild }: { svc: Service; isChild: boolean }) {
   const Icon = svc.icon;
   const t = svc.theme;
+  const parent = isChild && svc.parentId ? servicesData.find(s => s.id === svc.parentId) : undefined;
   return (
     <Link
       href={`/servicios/${svc.id}`}
@@ -30,7 +31,8 @@ function ServiceCard({ svc, isChild }: { svc: Service; isChild: boolean }) {
         </div>
         {isChild && (
           <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[#0077B6] mb-1">
-            <CornerDownRight className="w-3 h-3" /> Parte de otro servicio
+            <CornerDownRight className="w-3 h-3" />
+            {parent ? `Parte de ${parent.title}` : 'Parte de otro servicio'}
           </span>
         )}
         <h3 className="font-bold text-lg text-slate-800 mb-2">{svc.title}</h3>

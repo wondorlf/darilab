@@ -62,11 +62,17 @@ export default function FloatingContact() {
       const matchId = normalize(svc.id).includes(query);
       const matchCategory = svc.categories.some(c => normalize(c).includes(query));
       
-      const matchRecommendations = svc.recommendations 
-        ? svc.recommendations.some(r => normalize(r).includes(query))
-        : false;
+        const matchRecommendations = svc.recommendations
+          ? svc.recommendations.some(r => normalize(r).includes(query))
+          : false;
 
-      return matchTitle || matchDesc || matchId || matchCategory || matchRecommendations;
+        const matchGroups = svc.preparationGroups
+          ? svc.preparationGroups.some(g =>
+              normalize(g.title).includes(query) || g.items.some(item => normalize(item).includes(query))
+            )
+          : false;
+
+        return matchTitle || matchDesc || matchId || matchCategory || matchRecommendations || matchGroups;
     });
   }, [searchQuery]);
 

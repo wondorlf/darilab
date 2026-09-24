@@ -6,6 +6,7 @@ import {
   getParentService,
   getRelatedServices,
   getChildServices,
+  getDisplayGroups,
 } from '@/data/services';
 import { CalendarDays, CornerDownRight, Layers } from 'lucide-react';
 import Link from 'next/link';
@@ -45,6 +46,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const parent = getParentService(service);
   const children = getChildServices(service.id);
   const related = getRelatedServices(service).filter(r => r.id !== service.id);
+  const displayGroups = getDisplayGroups(service);
 
   return (
     <main className="flex-1 w-full max-w-[1440px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col lg:flex-row gap-8">
@@ -104,7 +106,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
              </div>
           </div>
 
-          {(service.preparationGroups && service.preparationGroups.length > 0) ? (
+          {displayGroups.length > 0 && (
             <div className="mt-8">
               <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
                 <span className={`w-8 h-8 rounded-lg ${service.theme.light} ${service.theme.text} flex items-center justify-center`}>
@@ -113,43 +115,31 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 Recomendaciones y Preparación
               </h3>
               <div className="space-y-5">
-                {service.preparationGroups.map((group, gi) => (
-                  <div key={gi} className="bg-slate-50 border border-slate-100 rounded-2xl overflow-hidden">
-                    <div className={`px-5 py-3 ${service.theme.solid} ${service.theme.countText === 'text-white' ? 'text-white' : ''} font-bold text-sm uppercase tracking-wide`}>
-                      {group.title}
+                {displayGroups.map((group, gi) => {
+                  const GroupIcon = group.icon;
+                  const darkBar = service.theme.countText === 'text-white';
+                  return (
+                    <div key={gi} className="bg-slate-50 border border-slate-100 rounded-2xl overflow-hidden">
+                      <div className={`px-5 py-3 flex items-center gap-2.5 ${service.theme.solid} ${darkBar ? 'text-white' : ''} font-bold text-sm uppercase tracking-wide`}>
+                        <span className={`inline-flex w-6 h-6 rounded-md items-center justify-center flex-shrink-0 ${darkBar ? 'bg-white/20' : 'bg-white/60'}`}>
+                          <GroupIcon className="w-3.5 h-3.5" aria-hidden="true" />
+                        </span>
+                        {group.title}
+                      </div>
+                      <ul className="p-4 space-y-3">
+                        {group.items.map((item, i) => (
+                          <li key={i} className="flex items-start gap-3 text-slate-700">
+                            <div className={`mt-0.5 w-6 h-6 rounded-full ${service.theme.countBg} ${service.theme.countText} flex items-center justify-center flex-shrink-0 text-xs font-bold`}>
+                              {i + 1}
+                            </div>
+                            <span className="text-sm leading-relaxed">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="p-4 space-y-3">
-                      {group.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate-700">
-                          <div className={`mt-0.5 w-6 h-6 rounded-full ${service.theme.countBg} ${service.theme.countText} flex items-center justify-center flex-shrink-0 text-xs font-bold`}>
-                            {i + 1}
-                          </div>
-                          <span className="text-sm leading-relaxed">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
-            </div>
-          ) : service.recommendations && service.recommendations.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                <span className={`w-8 h-8 rounded-lg ${service.theme.light} ${service.theme.text} flex items-center justify-center`}>
-                  <Icon className="w-4 h-4" />
-                </span>
-                Recomendaciones y Preparación
-              </h3>
-              <ul className="space-y-3">
-                {service.recommendations.map((rec, i) => (
-                  <li key={i} className="flex items-start gap-3 text-slate-700 bg-slate-50 border border-slate-100 p-4 rounded-xl">
-                    <div className={`mt-0.5 w-6 h-6 rounded-full ${service.theme.countBg} ${service.theme.countText} flex items-center justify-center flex-shrink-0 text-xs font-bold`}>
-                      {i + 1}
-                    </div>
-                    <span className="text-sm leading-relaxed">{rec}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           )}
 
